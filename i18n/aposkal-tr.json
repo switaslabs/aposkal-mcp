@@ -1,0 +1,1843 @@
+{
+ "_bilgi": "Aposkal OpenAPI tanımındaki İngilizce özet ve açıklamaların Türkçe karşılıkları. aposkal-mcp · Switas Consultancy (https://switas.com). Sunucu bu metinleri çalışma anında İngilizcelerin yerine kullanır; openapi/aposkal-openapi.json değiştirilmez.",
+ "tags": {
+  "Account": "Hesaplar (cari/kasa/banka)",
+  "Account Address": "Hesap adresleri",
+  "Accounting": "Muhasebe",
+  "Accounting Plan": "Hesap planı",
+  "Bank Document": "Banka hareketleri",
+  "Bank POS Commission": "Banka POS komisyonu",
+  "Category": "Kategoriler",
+  "Cheque": "Çekler",
+  "Company Client Data": "Firma istemci verisi",
+  "Currency": "Döviz kurları",
+  "DBS": "Dijital Beyan Sistemi (DBS)",
+  "DataPurge": "Toplu veri silme",
+  "Dealer": "Bayi",
+  "Definitions": "Tanımlar",
+  "Department": "Departmanlar",
+  "Document": "Belgeler",
+  "Document Notes": "Belge notları",
+  "Document Upload": "Belge yükleme",
+  "Employee": "Personel",
+  "Expense Note Document": "Gider pusulası",
+  "GibUser": "GİB mükellef sorgusu",
+  "GlobalSearch": "Genel arama",
+  "Integration": "Entegrasyonlar",
+  "Investment": "Yatırım",
+  "Invoice Inbox": "Gelen kutusu (e-belge)",
+  "Lease": "Kira belgeleri",
+  "Note Templates": "Not şablonları",
+  "Order": "Siparişler",
+  "POS": "POS",
+  "ParsedDocument": "Ayrıştırılmış belgeler",
+  "Payment": "Ödeme",
+  "Payroll": "Bordro",
+  "Payroll Deduction": "Bordro kesintileri",
+  "Product": "Ürünler",
+  "Profile": "Profil",
+  "Reports": "Raporlar",
+  "SGK Tescil": "SGK tescil",
+  "SGK Vizite": "SGK vizite",
+  "SSO": "Tek oturum açma (SSO)",
+  "SalesOffer": "Satış teklifleri",
+  "Settings": "Ayarlar",
+  "Stock": "Stok ve üretim",
+  "StockTransfer": "Stok transferi",
+  "Support": "Destek",
+  "Tag": "Etiketler",
+  "Tax Payer": "Mükellef bilgisi",
+  "Timesheet": "Puantaj",
+  "Warehouse": "Depolar",
+  "Webhook": "Webhook",
+  "Workplace": "İşyerleri",
+  "Workplace R&D Project": "İşyeri Ar-Ge projeleri",
+  "Workplace SGK": "İşyeri SGK bağlantısı",
+  "Z-Report": "Z raporu"
+ },
+ "operations": {
+  "acc-rec-auto-closing": {
+   "summary": "Kapanış muhasebe belgesini otomatik oluştur",
+   "description": "Gönderilen istek verisini kullanarak verilen firma için otomatik kapanış işlemi yapar ve yeni oluşturulan belgenin ID'sini döndürür."
+  },
+  "acc-rec-auto-opening": {
+   "summary": "Kapanış belgesinden açılış belgesini otomatik oluştur",
+   "description": "Bir kapanış muhasebe belgesi ID'sini alır ve verilen firma için buna karşılık gelen açılış muhasebe belgesini otomatik olarak oluşturur. Yeni oluşturulan açılış belgesinin ID'sini döndürür."
+  },
+  "accRecAutoOpeningLegacy": {
+   "summary": "Açılış muhasebe belgesini otomatik oluştur (kullanımdan kalktı)",
+   "description": "Kullanımdan kalktı: bunun yerine `POST /{companyId}/accRec/auto/{documentId}/acilis` kullanın. Bu endpoint, ön yüz geçişi tamamlandığında kaldırılacaktır."
+  },
+  "accept-sales-offer": {
+   "summary": "Satış teklifini kabul et",
+   "description": "Gönderilmiş bir teklifi müşteri tarafından kabul edildi olarak işaretler; böylece teklif siparişe dönüştürülebilir hale gelir"
+  },
+  "add-dealer-customer": {
+   "summary": "Bayiye yeni müşteri firma ekle"
+  },
+  "add-note-to-document": {
+   "summary": "Belgeye not ekle",
+   "description": "Belgeye not ekler."
+  },
+  "add-reply-to-support-ticket-json": {
+   "summary": "Destek talebine yanıt ekle (JSON)",
+   "description": "Mevcut bir destek talebine ek dosya olmadan yanıt ekler."
+  },
+  "add-tag-document": {
+   "summary": "Belgeye etiket ekle",
+   "description": "Belgeye etiket ekler."
+  },
+  "address-details": {
+   "summary": "Adres ara",
+   "description": "Adres arar"
+  },
+  "aggregate-parsed-documents": {
+   "summary": "Ayrıştırılmış belgeleri döneme göre topla"
+  },
+  "apply-sgk-tescil-sync": {
+   "summary": "Mutabakat sonucunu kaydet",
+   "description": "SGK'da bulunan bildirgeleri kaydeder; personel kartındaki tarihlere dokunulmaz"
+  },
+  "approve-accounting-record": {
+   "summary": "Muhasebe kayıtlarını onayla",
+   "description": "Verilen belgenin muhasebe kayıtlarını onaylar."
+  },
+  "approve-all-acc-rec-ready": {
+   "summary": "Hazır tüm muhasebe kayıtlarını onayla",
+   "description": "Muhasebe kayıtları toplu onaya hazır olan belgeleri onaylar; muhasebe dönemi verilmişse yalnızca o dönemle sınırlıdır."
+  },
+  "approve-payroll": {
+   "summary": "Bordroyu onayla",
+   "description": "CALCULATED durumundaki bir bordroyu onaylar ve muhasebe kayıtlarını (BORDRO) oluşturur."
+  },
+  "archive": {
+   "summary": "Belgeleri arşivle",
+   "description": "Belirtilen firmaya ait seçili belgeleri arşivler.\nArşivlenen belgeler pasif duruma alınır ancak sistemde kalmaya devam eder.\n\nİstek gövdesi:\n- Arşivlenecek belge ID'lerinin listesi\n- İsteğe bağlı arşivleme nedeni"
+  },
+  "archive-invoice-inbox": {
+   "summary": "Fatura gelen kutusu kayıtlarını arşivle",
+   "description": "Belirtilen kriterlere göre fatura gelen kutusu kayıtlarını arşivler.\nBu işlem, faturaları mevzuata uyum ve geçmiş takibi amacıyla arşiv depolama alanına taşır.\nÇalıştırmak için uygun yetkiler gerekir."
+  },
+  "archive-order": {
+   "summary": "Siparişi arşivle",
+   "description": "Siparişi silmeden varsayılan listeden gizler. Geri alınabilir"
+  },
+  "archive-sales-offer": {
+   "summary": "Satış teklifini arşivle",
+   "description": "Satış teklifini silmeden varsayılan listeden gizler. Geri alınabilir"
+  },
+  "archive-uploaded-documents": {
+   "summary": "Yüklenen belgeleri arşivle",
+   "description": "Verilen yüklenmiş belgeleri arşive taşır. Arşivlenen belgeler varsayılan listede görünmez ve otomatik içe aktarmaya dahil edilmez."
+  },
+  "assign-category-to-entity": {
+   "summary": "Kayda kategori ata",
+   "description": "Verilen kategoriyi kayda atar"
+  },
+  "attach-bank-pre-acc": {
+   "summary": "Banka satırına ön muhasebe bağla",
+   "description": "Yalnızca muhasebe hesap koduyla kaydedilmiş bir banka hareketine cari veya ürün bağlar.\nFiş yeniden oluşturulmaz: yalnızca mevcut karşı satırdaki referans doldurulur."
+  },
+  "batch-assign-by-rule-key": {
+   "summary": "Kural anahtarına göre hesapları toplu ata",
+   "description": "ruleKey + yön + taraf bazında gruplanan taslak satırlara hesap atar. Zaten hesabı olan satırların üzerine asla yazmaz."
+  },
+  "batch-product-map": {
+   "summary": "Toplu ürün eşleştirme",
+   "description": "Birden fazla satırı hesap ID'si, ad ve birime göre karşılık gelen ürünlerle eşleştirir. Bu uç nokta, benzersiz kombinasyonları toplayıp tüm ürün eşleştirmelerini tek bir veritabanı sorgusuyla çekerek verimli toplu işlem yapar."
+  },
+  "batch-reassign-by-rule-key": {
+   "summary": "Kural anahtarına göre hesapları toplu yeniden ata",
+   "description": "Bir kural grubunun zaten atanmış satırlarını bir hesaptan başka bir hesaba taşır. Etkilenen SAVED belgeler yeniden onay için DRAFT durumuna geri döner."
+  },
+  "batchApprove": {
+   "summary": "Muhasebe kayıtlarını toplu onayla",
+   "description": "Verilen belgelerin muhasebe kayıtlarını onaylar."
+  },
+  "batchReopen": {
+   "summary": "Muhasebe kayıtlarını toplu yeniden aç",
+   "description": "Verilen belgelerin onaylanmış muhasebe kayıtlarını düzenleme için yeniden açar."
+  },
+  "batchRevert": {
+   "summary": "Muhasebe kayıtlarını toplu geri al",
+   "description": "Listedeki resmileştirilmiş veya aktarılmış belgeleri onaylanmış (kaydedilmiş) duruma geri alır. Diğer durumlardaki belgelere dokunulmaz; geri alınan belge sayısını döndürür."
+  },
+  "batchUpdateStatus": {
+   "summary": "Muhasebe kaydı durumunu toplu güncelle",
+   "description": "Belirtilen firma için muhasebe kayıtlarının durumunu toplu olarak günceller. Güncellemeden önce hiçbir belgenin 'FORMALIZED' durumunda olmadığını kontrol eder."
+  },
+  "bulk-create-bank-pos-commission": {
+   "summary": "POS komisyon fişlerini toplu oluştur",
+   "description": "Her banka satırı için bir DRAFT MAHSUP fişi (770 borç / 108 alacak) oluşturur ve\nöneriyi kullanıcının kararının yanına kaydeder. Her satır ayrı ayrı işlendiğinden satır bazlı\ndurumu kontrol edin: zaten fişi olan bir satır ALREADY_EXISTS olarak döner."
+  },
+  "bulk-create-expense-notes-from-documents": {
+   "summary": "Mevcut belgelerden toplu gider pusulası oluştur"
+  },
+  "bulk-save-accounting-records": {
+   "summary": "Muhasebe kayıtlarını toplu kaydet",
+   "description": "Tek istekte en fazla 500 muhasebe kaydı belgesi oluşturur. Her belge bağımsız olarak oluşturulup doğrulanır; bu nedenle bir belgedeki hata diğerlerini engellemez. Sonuçlar belge bazında, istek sırasıyla döndürülür."
+  },
+  "calculate-payroll": {
+   "summary": "Bordroyu hesapla",
+   "description": "Tüm personel için brütten nete hesaplamaları çalıştırır. Önce tüm puantajların mevcut olması gerekir."
+  },
+  "cancel-order": {
+   "summary": "Siparişi iptal et",
+   "description": "Taslak veya onaylanmış bir siparişi iptal eder"
+  },
+  "cancel-sales-offer": {
+   "summary": "Satış teklifini iptal et",
+   "description": "Taslak veya gönderilmiş bir satış teklifini iptal eder"
+  },
+  "cancel-sgk-tescil-declaration": {
+   "summary": "Bildirgeyi iptal et",
+   "description": "Reddedilmiş veya başarısız olmuş bir bildirgeyi sayaçlardan çıkarır"
+  },
+  "cancel-sgk-tescil-sync": {
+   "summary": "SGK kayıt mutabakatını iptal et",
+   "description": "Kuyruktaki veya çalışmakta olan bir çalıştırmayı durdurur; önceden işlenmiş kalemler sonuçlarını korur."
+  },
+  "cancel-sgk-vizite-notification": {
+   "summary": "SGK bildirimini iptal et",
+   "description": "SGK'ya daha önce gönderilmiş bir bildirimin iptalini kuyruğa alır"
+  },
+  "cancelDocument": {
+   "summary": "Belgeyi iptal et",
+   "description": "Belirtilen belgeyi iptal eder. Yetkilendirme gerektirir."
+  },
+  "cancelUndoDocument": {
+   "summary": "Belge iptalini geri al",
+   "description": "Belgenin iptalini geri alır. Belgeyi önceki durumuna döndürür."
+  },
+  "change-cheque-custody": {
+   "summary": "Çek saklama yerini değiştir",
+   "description": "Bir müşteri çekini veya alınan senedi portföy ile banka saklaması arasında taşır.\nBu geçiş için muhasebe kaydı oluşturulmaz."
+  },
+  "check-duplicate-documents": {
+   "summary": "Mükerrer belge kontrolü yap",
+   "description": "Aynı belge numarası, yıl ve hesap ID'sine sahip bir belgenin zaten var olup olmadığını kontrol eder.\nGenellikle sisteme mükerrer kayıt girilmesini önlemek için kullanılır.\n\nParametreler:\n- companyId: Kontrolün yapılacağı firmanın ID'si\n- documentNo: Mükerrerlik kontrolü yapılacak belge numarası\n- year: Kontrolün yapılacağı mali yıl\n- accountId: Belgeyle ilişkili hesap ID'si\n- id (isteğe bağlı): Verilirse bu ID kontrol dışında tutulur (mevcut bir belge güncellenirken kullanışlıdır)\n\nDönüş:\nKriterlere uyan mevcut belgelerin CheckMultipleDto nesneleri olarak listesi"
+  },
+  "check-gib-dispatch-user": {
+   "summary": "Karşı tarafın e-İrsaliye etiketlerini listele",
+   "description": "Karşı tarafın kayıtlı e-İrsaliye etiketlerini (alias) döndürür; e-İrsaliye mükellefi değilse boş dizi döner. e-Fatura ve e-İrsaliye etiketleri ayrı ayrı kaydedilir.",
+   "params": {
+    "vkn": "Sorgulanacak VKN ya da TCKN. accountId ile birlikte verilmezse zorunludur."
+   }
+  },
+  "check-gib-user": {
+   "summary": "Karşı tarafın e-Fatura etiketlerini listele",
+   "description": "Karşı tarafın kayıtlı e-Fatura etiketlerini (alias) döndürür; e-Fatura mükellefi değilse boş dizi döner. Taslağı oluşturmadan önce fatura senaryosunu bu sonuca göre seçin.",
+   "params": {
+    "vkn": "Sorgulanacak VKN ya da TCKN. accountId ile birlikte verilmezse zorunludur."
+   }
+  },
+  "collect-cheque": {
+   "summary": "Çeki tahsil et",
+   "description": "Açık bir çeki banka veya kasa hesabına tahsil eder ve bakiyesini bu tutar kadar kapatır.\nHedef hesap varsayılan olarak çekin şu anda bulunduğu bankadır."
+  },
+  "confirm-order": {
+   "summary": "Siparişi onayla",
+   "description": "Taslak bir siparişi onaylar ve faturaya/irsaliyeye dönüştürülebilir hale getirir"
+  },
+  "consolidated-deficit-record": {
+   "summary": "Konsolide açık kaydını getir"
+  },
+  "consolidated-deficit-record-by-code": {
+   "summary": "Hesap koduna göre konsolide açık bakiye kaydını getir",
+   "description": "Belirtilen hesap kodu ve firma için konsolide açık bakiye kaydını getirir; isteğe bağlı olarak bitiş tarihine göre filtrelenebilir."
+  },
+  "convert-order-to-dispatch": {
+   "summary": "Siparişi irsaliyeye dönüştür",
+   "description": "Onaylanmış ve henüz irsaliyelenmemiş bir siparişten taslak irsaliye belgesi oluşturur"
+  },
+  "convert-order-to-invoice": {
+   "summary": "Siparişi faturaya dönüştür",
+   "description": "Onaylanmış ve henüz faturalanmamış bir siparişten taslak fatura belgesi oluşturur"
+  },
+  "convert-sales-offer-to-invoice": {
+   "summary": "Satış teklifini faturaya dönüştür",
+   "description": "Kabul edilmiş ve henüz dönüştürülmemiş bir satış teklifinden taslak sipariş oluşturur ve bunu hemen taslak fatura belgesine dönüştürür"
+  },
+  "convert-sales-offer-to-order": {
+   "summary": "Satış teklifini siparişe dönüştür",
+   "description": "Kabul edilmiş ve henüz dönüştürülmemiş bir satış teklifinden taslak sipariş oluşturur"
+  },
+  "copy-production": {
+   "summary": "Üretim kaydını kopyala",
+   "description": "Belirtilen belge ID'si ve firma ID'sine göre mevcut bir üretim kaydının kopyasını oluşturur."
+  },
+  "copyDocument": {
+   "summary": "Belgeyi kopyala",
+   "description": "Mevcut bir belgenin tüm detaylarıyla bir kopyasını oluşturur.\nKopyalanan belge yeni ve benzersiz bir ID'ye sahip olur ancak orijinalle aynı verileri içerir.\nBenzer belgeler oluşturmak veya şablonları çoğaltmak için kullanışlıdır."
+  },
+  "count-overdue-accounts": {
+   "summary": "Vadesi geçmiş carileri say",
+   "description": "Panel rozetleri için, vadesi geçmiş alacakları ve borçları olan cari hesapları sayar."
+  },
+  "count-pre-acc-pending": {
+   "summary": "Ön muhasebe bekleyen banka satırlarını say",
+   "description": "Ön muhasebe bekleyen banka satırı sayısını ve fişiyle uyuşmayan satır sayısını döndürür."
+  },
+  "counter-accounts-by-acc-plan-id": {
+   "summary": "Hesabın geçmişteki karşı hesaplarını getir",
+   "description": "Bu hesabın onaylanmış belgelerde geçmişte birlikte yer aldığı karşı hesapları, en sık kullanılandan başlayarak getirir."
+  },
+  "create-account-address": {
+   "summary": "Cari adresi oluştur",
+   "description": "Belirtilen cari için yeni bir adres oluşturur",
+   "params": {
+    "companyId": "Firma kimliği",
+    "accountId": "Cari kimliği"
+   }
+  },
+  "create-amortization-acc": {
+   "summary": "Amortisman muhasebe işlemi oluştur",
+   "description": "Verilen firma ID'si için, gönderilen istek gövdesini kullanarak amortisman muhasebe sürecini başlatır. Oluşturulan amortisman işleminin ID'sini döndürür."
+  },
+  "create-basic-document": {
+   "summary": "Basit belge oluştur",
+   "description": "Otomatik hesaplamalı, sadeleştirilmiş istek formatıyla yeni bir belge oluşturur."
+  },
+  "create-bulk-documents": {
+   "summary": "Toplu belge oluştur",
+   "description": "Excel verisinden toplu olarak birden fazla belge oluşturur.\nSatırlar hesaba (accountId veya importAccount) ve tarihe göre gruplanır.\nHer grup, birden fazla satır içeren tek bir belge oluşturur.\n\n- accountId verilirse mevcut hesap kullanılır\n- accountId null ve importAccount verilmişse yeni hesap oluşturulur\n- productId boşsa açıklamaya göre mevcut ürün aranır, bulunamazsa yeni ürün oluşturulur\n- Total, nihai ödenecek tutarı ifade eder (KDV dahil, tevkifat düşülmüş)"
+  },
+  "create-bulk-zreport": {
+   "summary": "Toplu günlük Z raporu oluştur",
+   "description": "Toplu Z raporu oluşturur"
+  },
+  "create-category": {
+   "summary": "Kategori oluştur",
+   "description": "Firma için yeni bir kategori oluşturur"
+  },
+  "create-department": {
+   "summary": "Yeni departman oluştur",
+   "description": "Belirtilen işyerinde yeni bir departman oluşturur"
+  },
+  "create-document": {
+   "summary": "Belge oluştur",
+   "description": "Belirtilen firma için yeni bir belge oluşturur."
+  },
+  "create-expense-note-from-document": {
+   "summary": "Mevcut belgeden gider pusulası oluştur"
+  },
+  "create-fund-result": {
+   "summary": "Fon kâr/zararı oluştur",
+   "description": "Yatırım hesabı için bir fon kâr veya zarar kaydı oluşturur"
+  },
+  "create-lease-document": {
+   "summary": "Kira belgesi oluştur",
+   "description": "Stopaj hesaplamasıyla yeni bir kira belgesi oluşturur."
+  },
+  "create-note-template": {
+   "summary": "Not şablonu oluştur",
+   "description": "Yeniden kullanılabilir bir fatura notu kaydeder"
+  },
+  "create-order": {
+   "summary": "Yeni sipariş oluştur",
+   "description": "Satırlarıyla birlikte yeni bir taslak sipariş oluşturur"
+  },
+  "create-payroll": {
+   "summary": "Bordro dönemi oluştur",
+   "description": "Verilen yıl/ay için DRAFT durumunda bir bordro dönemi oluşturur."
+  },
+  "create-payroll-deduction": {
+   "summary": "Bordro kesintisi oluştur"
+  },
+  "create-pending-invoice-response": {
+   "summary": "Bekleyen fatura yanıtı oluştur",
+   "description": "Gelen kutusundaki belirli bir fatura için bekleyen bir yanıt oluşturur.\nBu işlem, ETTN ile tanımlanan fatura için bir yanıt sürecini başlatır.\nÇalıştırmak için uygun yetkiler gerekir.\n\n**Not:** Bu işlem genellikle kullanıcının bir faturaya yanıt vermesi gerektiğinde,\nancak yanıt henüz kesinleşmediğinde veya onay gerektirdiğinde kullanılır."
+  },
+  "create-pos-commission": {
+   "summary": "POS komisyonu oluştur",
+   "description": "Belirtilen hesap için bir POS komisyon kaydı oluşturur."
+  },
+  "create-product": {
+   "summary": "Yeni ürün oluştur",
+   "description": "Fiyat listeleri ve vergi bilgileri dahil verilen ayrıntılarla yeni bir ürün oluşturur"
+  },
+  "create-production": {
+   "summary": "Üretim kaydı oluştur",
+   "description": "Girdiler (hammadde + işçilik) stoğu azaltır (`OUTGOING`), çıktılar (mamul ürünler) stoğu artırır (`INCOMING`)."
+  },
+  "create-products-with-initial-stock": {
+   "summary": "Açılış stoğuyla ürün oluştur",
+   "description": "Birden fazla ürünü açılış bakiyesi stoğuyla oluşturur veya günceller. Her kalem için: `productId` null ise yeni ürün oluşturur ya da aynı ada sahip mevcut ürünü kullanır; `productId` varsa doğrulayıp onu kullanır. Miktarı ve alış fiyatı olan tüm kalemleri içeren tek bir açılış bakiyesi belgesi oluşturur."
+  },
+  "create-sales-offer": {
+   "summary": "Yeni satış teklifi oluştur",
+   "description": "Satırlarıyla birlikte yeni bir taslak satış teklifi oluşturur"
+  },
+  "create-sales-subtype": {
+   "summary": "Satış alt türü oluştur",
+   "description": "Belirtilen firma için yeni bir DBS satış alt türü oluşturur"
+  },
+  "create-sgk-vizite-notification": {
+   "summary": "İstirahat sonucunu SGK'ya bildir",
+   "description": "Bildirimi kuyruğa alır; bildirim SGK'ya arka planda çalışan bir iş tarafından gönderilir"
+  },
+  "create-stock-transfer": {
+   "summary": "Stok transferi oluştur",
+   "description": "Ürünleri bir depodan diğerine taşır; isteğe bağlı olarak gönderilmemiş bir iç sevk irsaliyesi taslağı olarak oluşturur."
+  },
+  "create-support-ticket-json": {
+   "summary": "Destek talebi oluştur (JSON)",
+   "description": "Belirtilen firma için ek dosya olmadan yeni bir destek talebi oluşturur."
+  },
+  "create-tag": {
+   "summary": "Yeni belge etiketi oluştur",
+   "description": "Etiket oluşturur."
+  },
+  "create-tax-payment": {
+   "summary": "Vergi/SGK ödeme muhasebe kaydı oluştur",
+   "description": "Verilen ödeme hesabından yapılan vergi (VERGI) veya SGK ödemesi için DRAFT durumunda bir muhasebe kaydı oluşturur."
+  },
+  "create-vat-accounting": {
+   "summary": "KDV muhasebe kayıtlarını oluştur",
+   "description": "Belirtilen firma için KDV ile ilgili muhasebe kayıtlarını otomatik olarak oluşturur."
+  },
+  "create-virman": {
+   "summary": "Virman işlemi oluştur",
+   "description": "Verilen firma ID'si için, gönderilen istek gövdesini kullanarak muhasebe virman sürecini başlatır. Oluşturulan işlemin ID'sini döndürür."
+  },
+  "create-warehouse": {
+   "summary": "Depo oluştur",
+   "description": "Henüz deposu olmayan bir firma adresinde depo açar. Firmanın ilk deposu varsayılan depo olur."
+  },
+  "create-webhook": {
+   "summary": "Webhook oluştur",
+   "description": "URL'ye imzalı bir test olayı gönderir ve webhook'u yalnızca 2xx yanıt verirse kaydeder. İmzalama gizli anahtarı (secret) yalnızca bir kez gösterilir."
+  },
+  "create-workplace": {
+   "summary": "Yeni işyeri oluştur",
+   "description": "Belirtilen firma için yeni bir işyeri oluşturur"
+  },
+  "create-workplace-rnd-project": {
+   "summary": "Ar-Ge projesi oluştur"
+  },
+  "createAccPlan": {
+   "summary": "Hesap planı kaydı oluştur",
+   "description": "Yeni bir hesap planı kaydı oluşturur."
+  },
+  "createAccPlans": {
+   "summary": "Toplu hesap planı kaydı oluştur",
+   "description": "Birden fazla hesap planı kaydı oluşturur."
+  },
+  "createFromDoc": {
+   "summary": "Belgeden muhasebe kaydı oluştur",
+   "description": "Mevcut bir belgeyi temel alarak yeni bir muhasebe kaydı oluşturur."
+  },
+  "createOpeningBalance": {
+   "summary": "Açılış bakiyesi kayıtları oluştur",
+   "description": "Hesapları başka bir muhasebe sisteminden Aposkal'a aktarmak için açılış bakiyesi (devir) kayıtları oluşturur."
+  },
+  "createReturnDocument": {
+   "summary": "İade belgesi oluştur",
+   "description": "Orijinal belge referansına dayanarak bir iade belgesi oluşturur."
+  },
+  "delete-account": {
+   "summary": "Hesabı sil",
+   "description": "Bir hesabı ID'sine göre kalıcı olarak siler.\nBaşarılı olduğunda 204 No Content döner."
+  },
+  "delete-account-address": {
+   "summary": "Cari adresini sil",
+   "description": "Belirtilen cariden bir adresi siler. Not: Fatura adresi (Merkez) silinemez",
+   "params": {
+    "companyId": "Firma kimliği",
+    "accountId": "Cari kimliği",
+    "addressId": "Adres kimliği"
+   }
+  },
+  "delete-category": {
+   "summary": "Kategoriyi sil",
+   "description": "Bir kategoriyi ID'sine göre siler"
+  },
+  "delete-company-client-data-value": {
+   "summary": "İstemci verisi değerini sil",
+   "description": "Anahtarı kaldırır; anahtar mevcut olmasa bile başarılı olur."
+  },
+  "delete-department": {
+   "summary": "Departmanı sil",
+   "description": "Belirtilen ID'ye sahip departmanı siler"
+  },
+  "delete-document-delete": {
+   "summary": "Belge notunu sil",
+   "description": "Belge notunu siler."
+  },
+  "delete-document-name": {
+   "summary": "Belge adını sil",
+   "description": "Belirli bir belgenin adını siler."
+  },
+  "delete-document-payment": {
+   "summary": "Belgeye ait bir ödemeyi sil"
+  },
+  "delete-e-invoice-attachment": {
+   "summary": "Firmanın e-Fatura ekini sil",
+   "description": "Firma logosu veya imza ekini siler."
+  },
+  "delete-employee": {
+   "summary": "Personeli sil",
+   "description": "Bir personeli kimliğine göre kalıcı olarak siler."
+  },
+  "delete-multiple-documents": {
+   "summary": "Birden fazla belgeyi sil",
+   "description": "Birden fazla belgeyi ID'lerine göre siler"
+  },
+  "delete-note-template": {
+   "summary": "Not şablonunu sil",
+   "description": "Kayıtlı bir notu siler"
+  },
+  "delete-order": {
+   "summary": "Siparişi sil",
+   "description": "Taslak bir siparişi siler. Yalnızca taslak siparişler silinebilir"
+  },
+  "delete-payroll": {
+   "summary": "Bordroyu sil",
+   "description": "DRAFT veya CALCULATED durumundaki bir bordroyu tüm satırlarıyla birlikte siler. APPROVED durumundaki bir bordronun önce onayı geri alınmalıdır."
+  },
+  "delete-payroll-deduction": {
+   "summary": "Bordro kesintisini sil",
+   "description": "Bir kesintiyi siler. Dönemin bordrosu zaten hesaplanmışsa silinemez."
+  },
+  "delete-product": {
+   "summary": "Ürünü sil",
+   "description": "Mevcut bir ürünü siler"
+  },
+  "delete-production": {
+   "summary": "Üretim kaydını sil",
+   "description": "Belirtilen belge ID'si ve firma ID'sine göre bir üretim kaydını siler."
+  },
+  "delete-sales-offer": {
+   "summary": "Satış teklifini sil",
+   "description": "Taslak bir satış teklifini siler. Yalnızca taslak teklifler silinebilir"
+  },
+  "delete-single-document": {
+   "summary": "Tek bir belgeyi sil",
+   "description": "Belirli bir belgeyi ETTN'sine (Evrensel Tekil Tanımlama Numarası) göre siler"
+  },
+  "delete-stock-transfer": {
+   "summary": "Stok transferini sil",
+   "description": "İrsaliyesi gönderilmemiş bir stok transferini siler."
+  },
+  "delete-tag": {
+   "summary": "Belge etiketini sil",
+   "description": "Etiketi siler."
+  },
+  "delete-timesheet": {
+   "summary": "Puantajı sil",
+   "description": "Bir puantaj kaydını siler. Bordro zaten hesaplanmışsa silinemez."
+  },
+  "delete-warehouse": {
+   "summary": "Depoyu sil",
+   "description": "Bir depoyu siler. Varsayılan depo silinemez.",
+   "params": {
+    "moveTo": "Silinen deponun stok hareketlerini devralacak depo; deponun hareketleri varsa zorunludur."
+   }
+  },
+  "delete-webhook": {
+   "summary": "Webhook'u sil",
+   "description": "Webhook'u ve bekleyen gönderimlerini siler."
+  },
+  "delete-workplace": {
+   "summary": "İşyerini sil",
+   "description": "Belirtilen ID'ye sahip işyerini siler"
+  },
+  "delete-workplace-rnd-project": {
+   "summary": "Ar-Ge projesini sil"
+  },
+  "deleteAccPlans": {
+   "summary": "Toplu hesap planı kaydı sil",
+   "description": "Birden fazla hesap planı kaydını siler."
+  },
+  "deleteDocument": {
+   "summary": "Belgeyi sil",
+   "description": "Belirtilen firmaya ait, verilen ID'ye sahip belgeyi siler."
+  },
+  "deleteFromDBS": {
+   "summary": "Belgeyi DBS'den sil",
+   "description": "Bu servis bir belgeyi DBS'den siler"
+  },
+  "detect-bank-virman": {
+   "summary": "Banka virmanlarını tespit et",
+   "description": "Verilen tarih aralığındaki taslak banka belgeleri arasında firmanın kendi hesapları arasındaki virman çiftlerini tespit eder."
+  },
+  "document-note-count": {
+   "summary": "Belge not sayısını getir",
+   "description": "Belge not sayısını getirir."
+  },
+  "documentBank": {
+   "summary": "Banka belgelerini kaydet",
+   "description": "Belirtilen firma ve hesap için banka ekstresi belgelerini kaydeder.\nBanka ekstresi verilerini işler ve belge sisteminde saklar."
+  },
+  "download-document": {
+   "summary": "Belge dosyasını indir",
+   "description": "İstenen formattaki belge dosyası için imzalı bir CDN bağlantısına yönlendirir. Desteklenen formatlar: pdf, xml, html. Varsayılan: pdf."
+  },
+  "download-expense-note-pdf": {
+   "summary": "Gider pusulası PDF'ini indir",
+   "description": "Kağıt gider pusulasının veya henüz gönderilmemiş bir e-gider pusulasının PDF'ini döndürür."
+  },
+  "download-order-pdf": {
+   "summary": "Sipariş PDF'ini indir",
+   "description": "Siparişi indirilebilir bir PDF olarak oluşturur"
+  },
+  "download-sales-offer-pdf": {
+   "summary": "Satış teklifi PDF'ini indir",
+   "description": "Satış teklifini indirilebilir bir PDF olarak oluşturur"
+  },
+  "e-invoice-data": {
+   "summary": "ETTN ile GİB'den ayrıntılı e-Fatura verisini getir",
+   "description": "ETTN ile tanımlanan belirli bir fatura için ayrıntılı elektronik fatura verisini getirir.\nBelge numarası, durum filtrelemesi ve ayrıştırma seçenekleri için isteğe bağlı parametreleri destekler.\nYapılandırılmış fatura verisini sistemin formatında döndürür."
+  },
+  "ensure-standard-expense-products": {
+   "summary": "Standart gider ürünlerini garanti et",
+   "description": "İdempotenttir: her ad için, eşleşen yoksa (Türkçe büyük/küçük harf duyarsız) EXPENSE ürünü oluşturur, varsa ancak henüz onaylanmamışsa onaylar, zaten onaylıysa atlar. Aynı adlarla tekrarlanan çağrı hiçbir değişiklik yapmaz."
+  },
+  "export-document-detailed-pdf-report-by-ids": {
+   "summary": "Seçili belgelerin detaylı raporlarını dışa aktar",
+   "description": "ID'leriyle seçilen belgeleri dışa aktarır.\nPDF ve XML formatlarında, belge dosyalarını içeren zip arşivine imzalı bir URL döndürür.\nJSON için detaylı rapor satırlarını doğrudan yanıt içinde döndürür. Diğer formatlarda (Excel, CSV) rapor dosyasını döndürür."
+  },
+  "export-document-detailed-report": {
+   "summary": "Detaylı belge raporunu dışa aktar",
+   "description": "Vergi bilgisi kırılımlarını içeren detaylı belge raporunu belirtilen formatta dışa aktarır.\njson formatı, API kullanıcıları için dosya yerine satırları doğrudan yanıt içinde döndürür.",
+   "params": {
+    "direction": "Belge yönü filtresi (INCOMING veya OUTGOING)",
+    "startDate": "Belgeleri filtrelemek için başlangıç tarihi",
+    "endDate": "Belgeleri filtrelemek için bitiş tarihi"
+   }
+  },
+  "export-muavin": {
+   "summary": "Hesap Muavin'ini dışa aktar",
+   "description": "Belirli bir hesabın Muavin (ayrıntılı defter) kayıtlarına ait bir rapor oluşturur ve indirir.\nPara birimi, arama sorgusu ve tarih aralığına göre filtrelemeyi destekler.\nEşleşen tüm kayıtları (sayfalama olmadan) belirtilen formatta (PDF, EXCEL veya CSV) döner."
+  },
+  "export-product-statement": {
+   "summary": "Ürün ekstresini Excel'e aktar",
+   "description": "Tüm ürün ekstresi hareketlerini (sayfalı değil) Excel (XLSX) dosyası olarak dışa aktarır"
+  },
+  "export-product-statement-format": {
+   "summary": "Ürün ekstresini dışa aktar",
+   "description": "Filtrelerle eşleşen tüm hareketleri (sayfalı değil) excel veya pdf olarak dışa aktarır. Hizmet ve gider kartlarında stok sütunu yer almaz."
+  },
+  "export-stock-report": {
+   "summary": "Stok raporunu Excel'e aktar",
+   "description": "Stok raporunun tamamını (sayfalama olmadan) Excel (XLSX) dosyası olarak dışa aktarır."
+  },
+  "find-accounts-from-vkn-list": {
+   "summary": "VKN/TCKN listesinden cari bul",
+   "description": "Bir VKN/TCKN numaraları veya firma unvanları listesiyle eşleşen carileri bulur.\nBulunduğunda hesap ID'lerini, eşleşme yoksa null döner."
+  },
+  "forget-rule-keys": {
+   "summary": "Öğrenilmiş tüm muhasebe kurallarını unut",
+   "description": "Firmanın tüm muhasebe kayıtlarındaki ruleKey değerini temizleyerek kural tabanlı hesap tahmin motorunu sıfırlar."
+  },
+  "formalizeDocument": {
+   "summary": "Belgeyi resmileştir"
+  },
+  "generate-document-verification-code": {
+   "summary": "Belge için doğrulama kodu oluştur"
+  },
+  "get-acc-rec-ready-count": {
+   "summary": "Onaya hazır muhasebe kayıtlarını say",
+   "description": "Muhasebe kayıtları toplu onaya hazır olan belgelerin sayısını döndürür."
+  },
+  "get-acc-rec-ready-list": {
+   "summary": "Onaya hazır muhasebe kayıtlarını getir",
+   "description": "Muhasebe kayıtları tamamlanmış ve toplu onaya hazır belgeleri getirir."
+  },
+  "get-acc-rec-recreate-list": {
+   "summary": "Yeniden oluşturulacak muhasebe kayıtlarını getir",
+   "description": "Muhasebe kayıtları olan belgeleri filtrelere göre (dengesiz, eksik veya hazır kayıtlar) getirir."
+  },
+  "get-account": {
+   "summary": "ID ile hesap getir",
+   "description": "Belirli bir hesabın ayrıntılı bilgilerini ID'sine göre getirir."
+  },
+  "get-account-address": {
+   "summary": "Cari adresini kimliğe göre getir",
+   "description": "Bir carinin belirli bir adresini getirir",
+   "params": {
+    "companyId": "Firma kimliği",
+    "accountId": "Cari kimliği",
+    "addressId": "Adres kimliği"
+   }
+  },
+  "get-account-by-acc-code": {
+   "summary": "Hesap koduna göre hesapları getir",
+   "description": "Muhasebe kayıtlarını hesap kodu, tarih aralığı ve hesap ilişkisine göre filtreleyerek getirir."
+  },
+  "get-account-detail-report": {
+   "summary": "Hesap detay raporunu getir",
+   "description": "Belirli bir hesabın hareketlerinden rapor oluşturur"
+  },
+  "get-account-invoice-address": {
+   "summary": "Fatura adresini getir",
+   "description": "Belirtilen carinin fatura adresini (Merkez) getirir",
+   "params": {
+    "companyId": "Firma kimliği",
+    "accountId": "Cari kimliği"
+   }
+  },
+  "get-account-summary": {
+   "summary": "Hesap özetini getir (gün sonu raporu)",
+   "description": "İki tarih arasında bir hesabın Muavin kayıtlarının dönem bazlı toplamlarını döner"
+  },
+  "get-account-summary_1": {
+   "summary": "Hesap özeti ayrıntılarını getir",
+   "description": "Tüm hesapların bakiyeleri ve hareketleriyle ayrıntılı dökümünü getirir"
+  },
+  "get-accounting-code-account-mapping": {
+   "summary": "Muhasebe kodu - hesap eşleşmesini getir",
+   "description": "Verilen hesaba ait tüm muhasebe kodlarını ya da verilen muhasebe koduna ait tüm hesapları getirir. 'accountId' ve 'accountingCode' parametrelerinden yalnızca biri verilmelidir."
+  },
+  "get-accounting-code-account-mapping-bulk": {
+   "summary": "Muhasebe kodu - hesap eşleşmesini toplu getir",
+   "description": "İstenen her muhasebe kodu altında kayıt atılmış hesapları, kodun birebir eşleşmesine göre getirir. Hiç muhasebe kaydı olmayan bir kod boş hesap listesiyle döner; böylece başarısız bir istekten ayırt edilebilir."
+  },
+  "get-accounting-codes-with-multiple-accounts": {
+   "summary": "Muhasebe kodlarını hesaplarıyla birlikte getir",
+   "description": "Tüm muhasebe kodlarını ilişkili hesaplarıyla birlikte sayfalı olarak getirir. Birden fazla hesap tarafından kullanılan kodları tespit etmek için kullanışlıdır. Kod başına en fazla 10 hesap döner."
+  },
+  "get-accounting-record": {
+   "summary": "Belgenin tüm muhasebe kaydı satırlarını getir",
+   "description": "Belirtilen firma ve belge ID'si için muhasebe kayıtlarını getirir."
+  },
+  "get-accounting-record-rules": {
+   "summary": "Belgeye uygulanabilir muhasebe kurallarını getir",
+   "description": "Verilen belgeye uygulanabilir, kategoriye özgü muhasebe kurallarını getirir."
+  },
+  "get-accounts": {
+   "summary": "Hesapları türe göre listele",
+   "description": "Türe ve arama sorgusuna göre filtrelenmiş hesapları sayfalı liste olarak getirir.\nHesaplar oluşturulma tarihine göre azalan sırada döner."
+  },
+  "get-accounts-mizan": {
+   "summary": "Hesap Mizan'ını getir",
+   "description": "Hesaplar için sayfalı mizan (Mizan) verilerini getirir.\nBakiye türü, hesap türleri, tarih aralığı, arama sorgusu ve arşiv durumuna göre filtrelemeyi destekler.\nİsteğe bağlı olarak toplam hesaplamalarını da içerir."
+  },
+  "get-accounts-summary": {
+   "summary": "Firma hesap özetini türe göre getir",
+   "description": "Firmanın tüm hesaplarının iki tarih arasındaki giriş/çıkış toplamlarını,\nhesap türüne ve döneme (gün, hafta veya ay) göre gruplanmış olarak döner"
+  },
+  "get-accounts-tcvkn": {
+   "summary": "TC/VKN ile cari getir",
+   "description": "Verilen T.C. Kimlik Numarası (TC) veya Vergi Kimlik Numarası (VKN) ile eşleşen\nilk cariyi getirir. Hesap bulunamazsa null döner."
+  },
+  "get-accounts-with-multiple-accounting-codes": {
+   "summary": "Hesapları muhasebe kodlarıyla birlikte getir",
+   "description": "Tüm hesapları ilişkili muhasebe kodlarıyla birlikte sayfalı olarak getirir. Birden fazla koda eşlenmiş hesapları tespit etmek için kullanışlıdır."
+  },
+  "get-all-support-tickets": {
+   "summary": "Firmanın tüm destek taleplerini getir",
+   "description": "Belirtilen firmanın tüm destek taleplerini sayfalı liste olarak getirir."
+  },
+  "get-amortization": {
+   "summary": "Amortisman listesini getir",
+   "description": "Belirtilen firmanın tüm ürünleri için verilen döneme ait amortisman hesaplama sonuçlarını getirir."
+  },
+  "get-analytics-context": {
+   "summary": "Analitik bağlamını getir",
+   "description": "Analitik amacıyla kullanıcı türünü ve verilen firmanın abonelik durumunu döndürür."
+  },
+  "get-assets-report": {
+   "summary": "Firma varlık raporunu getir",
+   "description": "Belirtilen firmanın tüm varlıklarına ilişkin kapsamlı bir rapor getirir"
+  },
+  "get-assigned-rule-groups": {
+   "summary": "Atanmış kural gruplarını listele",
+   "description": "Kural düzeltme ekranı için, taslak kapsamındaki ve zaten bir hesabı olan satırları gruplar. Aynı ruleKey iki farklı hesapta kullanılıyorsa iki ayrı grup oluşur."
+  },
+  "get-bank-document": {
+   "summary": "Banka belgesini kimliğe göre getir",
+   "description": "Tek bir banka belgesini kimliğine göre getirir.\nBelgeyi tahminler ve benzer belgelerle birlikte döndürür."
+  },
+  "get-bank-pos-commission-context": {
+   "summary": "Banka satırları için POS komisyon bağlamını getir",
+   "description": "Her banka satırı için mevcut komisyon fişini, tek 108.x karşı hesabını ve\nüzerinde kaydedilmiş son kararı döner. Bildirilecek bir şeyi olmayan satırlar\nlisteye dahil edilmez."
+  },
+  "get-bank-pos-commission-defaults": {
+   "summary": "POS komisyon varsayılanlarını getir",
+   "description": "Bu banka hesabının son komisyon fişinde (DRAFT fişler dahil) kullanılan 770 ve 108 hesaplarını,\nayrıca her öneri yöntemi için son on kararı döner. Henüz hiçbir şey öğrenilmemişse\nilgili alan null olur."
+  },
+  "get-bank-save-by-tag-job": {
+   "summary": "Toplu banka kaydetme işini getir",
+   "description": "Arka planda çalışan toplu kaydetme işinin ilerlemesi: kaç hareketin kaydedildiği, hangilerinin başarısız olduğu ve hangilerinin taslak olarak bırakıldığı."
+  },
+  "get-cash-flow-report": {
+   "summary": "Firma nakit akışı raporunu getir",
+   "description": "Firmanın işletme, yatırım ve finansman faaliyetlerine ait nakit giriş ve çıkışlarını gösteren nakit akış tablosunu getirir"
+  },
+  "get-categories": {
+   "summary": "Kategorileri getir",
+   "description": "Belirtilen defter türü, yön ve belge türü için kategorileri DBS'den getirir"
+  },
+  "get-category": {
+   "summary": "ID ile kategori getir",
+   "description": "Verilen firma için belirli bir kategoriyi ID'sine göre getirir"
+  },
+  "get-companies": {
+   "summary": "Firmaları getir",
+   "description": "Kullanıcının dahil olduğu firmaların listesini getirir."
+  },
+  "get-company-client-data-value": {
+   "summary": "İstemci verisi değerini getir",
+   "description": "Anahtar altında kayıtlı JSON değerini döndürür; değer yoksa 404 döner."
+  },
+  "get-company-config": {
+   "summary": "Firma yapılandırmasını getir",
+   "description": "Bir firmanın tüm yapılandırma ayarlarını getirir"
+  },
+  "get-company-config-key": {
+   "summary": "Belirli bir firma yapılandırmasını getir",
+   "description": "Belirli bir yapılandırma ayarının değerini getirir"
+  },
+  "get-company-settings": {
+   "summary": "Firma bilgilerini getir",
+   "description": "Belirtilen firmanın temel bilgilerini ve ayarlarını getirir"
+  },
+  "get-currency-rates": {
+   "summary": "Tarihler arası döviz kurlarını getir",
+   "description": "Tarihler arasındaki güncel kur değerlerini getirir.",
+   "params": {
+    "currency": "Kurun para birimi kodu."
+   }
+  },
+  "get-current-user-profile": {
+   "summary": "Mevcut kullanıcı profilini getir",
+   "description": "Mevcut kullanıcının profil bilgilerini getirir."
+  },
+  "get-data-purge": {
+   "summary": "Toplu silme işini getir",
+   "description": "İşin durumunu ve kapsam bazında ilerlemesini döndürür."
+  },
+  "get-dbs-document-suggestion": {
+   "summary": "DBS belge önerisini getir",
+   "description": "DBS aktarımına yardımcı olmak için belirtilen belgeye ait DBS alan önerilerini döndürür"
+  },
+  "get-dbs-documents-status": {
+   "summary": "DBS belge durumlarını getir",
+   "description": "Belirtilen firma için DBS belgelerinin durumlara göre sayısını döndürür"
+  },
+  "get-department": {
+   "summary": "Departmanı ID ile getir",
+   "description": "Verilen işyeri için belirli bir departmanı ID'si ile getirir"
+  },
+  "get-document": {
+   "summary": "Belgeyi tüm detaylarıyla getir",
+   "description": "Belirtilen firmaya ait, verilen ID'ye sahip tek bir belgeyi getirir."
+  },
+  "get-document-inbox-paths": {
+   "summary": "Gelen kutusu belge yollarını getir",
+   "description": "Birden çok gelen kutusu kalemi (hem DocumentInbox hem InvoiceInbox) için dosya yollarını getirir.\nBu uç nokta bir id listesi alır ve hem normal belgeler hem de faturalar için\nkarşılık gelen dosya yollarını ve meta verileri döndürür."
+  },
+  "get-document-line-report": {
+   "summary": "Belge satırlarından rapor getir",
+   "description": "Belge satırlarından rapor oluşturur"
+  },
+  "get-document-name": {
+   "summary": "Belge adını getir",
+   "description": "Belirli bir belgenin adını ID'sine göre getirir."
+  },
+  "get-document-series-gaps": {
+   "summary": "Yıla ait belge numarası boşluklarını listele",
+   "description": "Yıl içindeki kullanılmamış giden belge numaralarını seriye göre gruplayarak listeler.\nİptal edilen, reddedilen, mükerrer ve ayrıştırılamayan numaralar ayrı listelerde raporlanır.",
+   "params": {
+    "year": "Belge numaralarının yıl bileşeni"
+   }
+  },
+  "get-document-status-summary-report": {
+   "summary": "Belge durumu özet raporunu getir",
+   "description": "Belge durumu özet raporunu getirir."
+  },
+  "get-document-tags": {
+   "summary": "Belgeye atanmış etiketleri getir",
+   "description": "Belge etiketlerini getirir."
+  },
+  "get-document-types": {
+   "summary": "Belge türlerini getir",
+   "description": "Belirtilen defter türü ve yön kategorisi için kullanılabilen belge türlerini DBS'den getirir"
+  },
+  "get-documents": {
+   "summary": "Firma belgelerini filtreleyerek ara ve listele",
+   "description": "Belirtilen firmanın belgelerini isteğe bağlı filtrelerle sayfalı liste olarak getirir.\nYanıt türünü belirlemek için 'detail' parametresini kullanın."
+  },
+  "get-documents-for-formalize": {
+   "summary": "Resmileştirmeye hazır belgeleri ara ve listele",
+   "description": "Resmileştirme hazırlık verileriyle birlikte filtrelenmiş belge listesini TEK bir API çağrısında getirir.\nVarsayılan sıralama: date ASC, time ASC, createdAt ASC\n\nDRAFT belgeler için: senaryoyu ve belge tipini belirler, GİB kullanıcı durumunu getirir.\nDRAFT olmayan belgeler için: olduğu gibi döndürür."
+  },
+  "get-draft-document-ids": {
+   "summary": "Taslak belge ID'lerini getir",
+   "description": "Firmanın taslak belgelerinin ID'lerini getirir.\nSonuç sayısı sınırlanabilir ve belirli bir belge hariç tutulabilir.",
+   "params": {
+    "limit": "En fazla sonuç sayısı",
+    "excludeId": "Hariç tutulacak belge ID'si"
+   }
+  },
+  "get-drafts-documents": {
+   "summary": "Giden taslak belge sayısını getir",
+   "description": "Taslak belge sayısını getirir."
+  },
+  "get-employee": {
+   "summary": "Personeli getir",
+   "description": "Belirli bir personeli kimliğine göre getirir."
+  },
+  "get-employee-codes": {
+   "summary": "Personel kodlarını getir",
+   "description": "Tüm istemciler için geçerli tüm SGK/bordro kodlarını etiketleriyle birlikte döndürür."
+  },
+  "get-entity-category": {
+   "summary": "Kayda atanmış kategoriyi getir",
+   "description": "Belirli bir kayda (ürün, hesap vb.) atanmış kategoriyi kayıt türü ve ID'sine göre getirir"
+  },
+  "get-expense-report": {
+   "summary": "Gider belgesi raporunu getir",
+   "description": "Son 12 aylık dönem için hesap bazında aylık tutar dökümünü gösteren ayrıntılı gider raporunu getirir"
+  },
+  "get-fixed-assets-codes": {
+   "summary": "Demirbaş kodlarını getir",
+   "description": "Belirtilen firma için DBS'de kullanılabilen demirbaş (sabit kıymet) kodlarının listesini getirir"
+  },
+  "get-integration": {
+   "summary": "Entegrasyonu getir",
+   "description": "Entegrasyonu getirir"
+  },
+  "get-invoice-inbox-item": {
+   "summary": "Gelen kutusundaki e-Faturayı ETTN ile getir"
+  },
+  "get-kt-auth-url": {
+   "summary": "KT yetkilendirme URL'sini getir"
+  },
+  "get-lease-document": {
+   "summary": "Kira belgesini getir",
+   "description": "Bir kira belgesini ID'ye göre getirir."
+  },
+  "get-most-used-payment-accounts": {
+   "summary": "Türe göre en çok kullanılan ödeme hesaplarını getir",
+   "description": "Belge yönü ve senaryosuna göre her ödeme türü için en çok kullanılan ödeme hesabını döndürür.\nHer tür (BANKA, KASA, POS vb.) için yalnızca en sık kullanılan hesap döndürülür.",
+   "params": {
+    "direction": "Belge yönü (INCOMING veya OUTGOING)",
+    "scenario": "Belge senaryosu (ör. TAHSILAT, ODEME, BANKA)"
+   }
+  },
+  "get-next-acc-code": {
+   "summary": "Sonraki hesap kodunu getir",
+   "description": "Sonraki boş hesap kodu: 120/320 ana hesapları için firmanın cari kod desenini izler, diğer durumlarda verilen üst hesabın altındaki sonraki kodu döndürür. Firma henüz cari kod desenini seçmediyse patternSelected false olur."
+  },
+  "get-note-template": {
+   "summary": "Not şablonunu getir",
+   "description": "Kayıtlı bir notu döndürür"
+  },
+  "get-order": {
+   "summary": "Sipariş ayrıntılarını getir",
+   "description": "Sipariş ayrıntısını satırlarıyla birlikte getirir"
+  },
+  "get-payment-report": {
+   "summary": "Satış tahsilat raporunu getir",
+   "description": "Son 12 aylık dönem için hesap bazında aylık gelir dökümünü gösteren ayrıntılı satış raporunu getirir"
+  },
+  "get-payroll": {
+   "summary": "Bordroyu getir",
+   "description": "Bir bordro dönemini toplu tutarlar ve son hesaplamanın uyarılarıyla birlikte döner."
+  },
+  "get-payroll-icmal-url": {
+   "summary": "Bordro icmal URL'sini getir",
+   "description": "Dönemin imza sütunlu bordro icmali için önceden imzalanmış (presigned) bir S3 URL'si döner."
+  },
+  "get-payroll-line": {
+   "summary": "Bordro satırını getir",
+   "description": "Tek bir personelin ayrıntılı bordro hesaplamasını döner."
+  },
+  "get-payroll-parameters": {
+   "summary": "Bordro parametrelerini getir",
+   "description": "Dönemi belirleyen parametre satırını, yaş gruplarına göre çocuk yardımı gelir vergisi istisna tutarlarıyla birlikte döner."
+  },
+  "get-payslip-url": {
+   "summary": "Bordro pusulası URL'sini getir",
+   "description": "Personelin bordro pusulası PDF'i için önceden imzalanmış (presigned) bir S3 URL'si döner. Yalnızca APPROVED durumundaki bordrolar için kullanılabilir."
+  },
+  "get-payslip-url-by-period": {
+   "summary": "Döneme göre bordro pusulası URL'si getir",
+   "description": "Personelin bordro pusulası PDF'i için accountId, yıl ve aya göre doğrudan önceden imzalanmış (presigned) bir S3 URL'si döner."
+  },
+  "get-period-summary": {
+   "summary": "Dönem belge özetini getir",
+   "description": "Her ayın belgelerini senaryo, belge türü, yön ve muhasebe kaydı durumuna göre sayar ve toplam tutarlarını TRY cinsinden verir. Ay, belge tarihine göre belirlenir; bu nedenle her hücre, aynı filtrelerle liste endpoint'inin verdiği toplamla eşleşir."
+  },
+  "get-product": {
+   "summary": "Mevcut ürün ayrıntılarını getir",
+   "description": "Ürün ayrıntısını getirir"
+  },
+  "get-product-amortization": {
+   "summary": "Demirbaş amortismanını getir",
+   "description": "Demirbaş ürününün amortisman planını getirir"
+  },
+  "get-product-organize-overview": {
+   "summary": "Ürün düzenleme özetini getir",
+   "description": "Salt okunur; product/triage ve product/organize ekranlarının açılıştaki istek yığınının yerine geçen tek istek: firmanın tüm ürünlerini e-Fatura eşleştirme durumu ile alış/satış kullanımlarıyla birlikte tek yanıtta döndürür. Sayfalı değildir."
+  },
+  "get-product-report": {
+   "summary": "Aylık ürün özetini getir",
+   "description": "Belirtilen dönem aralığı için satış, maliyet ve kâr dahil ürün bazlı performans metriklerini getirir"
+  },
+  "get-product-statement": {
+   "summary": "Ürün ekstresini getir",
+   "description": "Ürün ekstresini sayfalı hareketlerle (en yeniden eskiye) getirir. Tarih, hesap, tutar ve miktar filtreleri VE (AND) ile birleştirilir."
+  },
+  "get-production": {
+   "summary": "Üretim kaydı ayrıntılarını getir",
+   "description": "Belirli bir üretim talebinin ayrıntılarını belge ID'si ve firma ID'si ile getirir."
+  },
+  "get-profit-report": {
+   "summary": "Kâr ve zarar raporunu getir",
+   "description": "Verilen dönem için firmanın gelirlerini, giderlerini ve net kârını gösteren kapsamlı bir kâr/zarar tablosu oluşturur"
+  },
+  "get-profit-trend-report": {
+   "summary": "Aylık kâr/zarar trendini getir (dönemsel gelir-gider serisi)",
+   "description": "Verilen dönem için firmanın gelirlerini, giderlerini ve net kârını gösteren kapsamlı bir kâr/zarar tablosu oluşturur"
+  },
+  "get-record-subtypes": {
+   "summary": "Kayıt alt türlerini getir",
+   "description": "Belirtilen defter türü, yön, belge türü, kategori ve kayıt türü için kayıt alt türlerini DBS'den getirir"
+  },
+  "get-record-types": {
+   "summary": "Kayıt türlerini getir",
+   "description": "Belirtilen defter türü, yön, belge türü ve kategori için kayıt türlerini DBS'den getirir"
+  },
+  "get-rules-by-rule-keys": {
+   "summary": "Kural anahtarlarına göre kuralları getir",
+   "description": "Kural anahtarlarına göre kuralları getirir."
+  },
+  "get-sales-offer": {
+   "summary": "Satış teklifi ayrıntılarını getir",
+   "description": "Satış teklifinin ayrıntılarını satırlarıyla birlikte getirir"
+  },
+  "get-sales-report": {
+   "summary": "Satış belgesi raporunu getir",
+   "description": "Son 12 aylık dönem için hesap bazında aylık gelir dökümünü gösteren ayrıntılı satış raporunu getirir"
+  },
+  "get-sgk-tescil-codes": {
+   "summary": "SGK tescil kod kataloğunu getir",
+   "description": "SGK kod listelerini kanal bazındaki formatlarıyla birlikte döndürür"
+  },
+  "get-sgk-tescil-declaration": {
+   "summary": "SGK bildirgesini getir",
+   "description": "Bildirgeyi gönderilen verilerle ve tüm gönderim denemeleriyle birlikte döndürür"
+  },
+  "get-sgk-tescil-declaration-pdf": {
+   "summary": "Bildirgenin SGK belgesini getir",
+   "description": "Barkodlu SGK belgesi için imzalı bir URL döndürür"
+  },
+  "get-sgk-tescil-exit-period": {
+   "summary": "İşten çıkış bildirgesi için SGK dönemlerini getir",
+   "description": "SGK'nın hesapladığı dönem sınırlarını bordroya dayalı bir öneriyle birlikte döndürür"
+  },
+  "get-sgk-tescil-status": {
+   "summary": "İşyeri bazında SGK tescil durumunu getir",
+   "description": "Her işyerinin bildirge gönderip gönderemeyeceğini ve hâlâ eksik olanları döndürür"
+  },
+  "get-sgk-tescil-sync": {
+   "summary": "SGK kayıt mutabakatını getir",
+   "description": "İlerleme durumunu ve SGK'nın personel bazında bildirdiği kayıtları döndürür"
+  },
+  "get-sgk-tescil-sync-config": {
+   "summary": "SGK kayıt mutabakatı kullanılabilirliğini getir",
+   "description": "Yeni mutabakat başlatılıp başlatılamayacağını bildirir."
+  },
+  "get-sgk-vizite-report": {
+   "summary": "SGK raporunu ID ile getir",
+   "description": "Tek bir istirahat raporunu döndürür"
+  },
+  "get-sgk-vizite-report-sgk-detail": {
+   "summary": "Raporun SGK tarafındaki bildirim kaydını oku",
+   "description": "SGK'yı canlı sorgular ve bu rapor için SGK'da tutulan bildirim bölümlerini döndürür"
+  },
+  "get-sgk-vizite-status": {
+   "summary": "İşyeri bazında SGK vizite durumunu getir",
+   "description": "Her işyerinin SGK istirahat durumunu döndürür"
+  },
+  "get-sgk-vizite-timesheet-suggestion": {
+   "summary": "Puantaj dönemi için istirahat günleri öner",
+   "description": "Verilen ayda her personelin SGK raporlarının kapsadığı günleri döndürür"
+  },
+  "get-sgk-work-accident-status": {
+   "summary": "İşyeri bazında iş kazası sorgu durumunu getir",
+   "description": "Her işyerinin iş kazası sorgu kuyruğundaki durumunu döndürür"
+  },
+  "get-stock-by-warehouse": {
+   "summary": "Depo bazında stok",
+   "description": "Stok takibi yapılan her ürünün her depodaki stoğunu, isteğe bağlı olarak belirli bir tarih itibarıyla döndürür."
+  },
+  "get-stock-report": {
+   "summary": "Stok raporu",
+   "description": "Belirli bir dönem için ürün bazında alınan ve satılan miktarları ağırlıklı ortalama fiyatlarla birlikte döndürür."
+  },
+  "get-stock-transfer": {
+   "summary": "Stok transferini getir",
+   "description": "Bir stok transferini ürünleriyle birlikte döndürür."
+  },
+  "get-support-ticket-by-id": {
+   "summary": "ID ile destek talebi getir",
+   "description": "Verilen firma için belirli bir destek talebini ID'sine göre getirir."
+  },
+  "get-system-variables": {
+   "summary": "Sistem değişkenlerini getir",
+   "description": "Belirtilen firma için DBS sistem değişkenlerini türe göre getirir"
+  },
+  "get-tag": {
+   "summary": "Belge etiketini ID ile getir",
+   "description": "Etiketi ID'ye göre getirir."
+  },
+  "get-tax-offices": {
+   "summary": "Vergi dairelerini getir",
+   "description": "DBS'de kullanılabilen vergi dairelerinin listesini döndürür"
+  },
+  "get-taxpayer-general-information": {
+   "summary": "Mükellef genel bilgilerini getir",
+   "description": "Belirtilen firmayla ilişkili mükellefin genel bilgilerini DBS'den getirir"
+  },
+  "get-taxpayers": {
+   "summary": "Mükellefleri getir",
+   "description": "Belirtilen firmaya ait mükelleflerin sayfalı listesini DBS'den döndürür"
+  },
+  "get-timesheet": {
+   "summary": "Puantajı getir",
+   "description": "Tek bir personelin verilen dönemdeki puantajını döndürür."
+  },
+  "get-todo-report": {
+   "summary": "Bekleyen işler raporunu getir",
+   "description": "Firma için işlem gerektiren bekleyen görevlerin, onayların ve takiplerin listesini getirir"
+  },
+  "get-todo-smm-banks-report": {
+   "summary": "SMM için ofis müşterilerinin banka hesaplarını getir",
+   "description": "Muhasebe ofisinin aktif müşterilerinden bir sayfa döndürür; her müşteri arşivlenmemiş banka hesapları, bu hesapların bakiyesi ve son muhasebe kaydının tarihiyle birlikte gelir. En çok geride kalan müşterileri başa almak için `behindRank` ile sıralayın."
+  },
+  "get-todo-smm-report": {
+   "summary": "SMM için bekleyen işler raporunu getir",
+   "description": "Firma için işlem gerektiren bekleyen görevlerin, onayların ve takiplerin listesini getirir"
+  },
+  "get-transferable-documents": {
+   "summary": "Aktarılabilir belgeleri getir",
+   "description": "Verilen dönem için Luca'ya aktarılmaya hazır, kaydedilmiş belgeleri muhasebe kayıtlarıyla birlikte; belge sınıfı, içerik grubu, seri ve belge numarasına göre sıralı olarak getirir. Her satır, aktarım ekranının Luca fişlerini böldüğü parti anahtarlarını içerir; sayfalama muhasebe kaydı sayısına değil, belge sayısına göre yapılır.",
+   "params": {
+    "withStockDetail": "Her satıra ürün, miktar ve KDV alanlarını ekler."
+   }
+  },
+  "get-transferable-documents-summary": {
+   "summary": "Aktarılabilir belgelerin özetini getir",
+   "description": "Luca'ya aktarılmaya hazır kaydedilmiş belgelerin aylık özetini getirir."
+  },
+  "get-unassigned-rule-groups": {
+   "summary": "Atanmamış kural gruplarını listele",
+   "description": "Kural tabanlı toplu atama ekranı için, ruleKey değeri olan ancak henüz hesabı olmayan taslak satırları gruplar."
+  },
+  "get-unassigned-rule-groups-count": {
+   "summary": "Atanmamış kural gruplarını say",
+   "description": "Atanmamış kural grupları listesinin kaç grup içereceğini döndürür."
+  },
+  "get-unvan": {
+   "summary": "Firma unvanını getir",
+   "description": "Belirtilen firmanın unvanını DBS'den getirir"
+  },
+  "get-used-periods": {
+   "summary": "Kullanılan dönemleri getir",
+   "description": "Belirtilen firmanın belgelerinde kullanılmış tüm farklı dönemleri getirir."
+  },
+  "get-vat-report": {
+   "summary": "KDV raporunu getir",
+   "description": "Belirtilen kayıt sınırıyla KDV hesaplama raporunu getirir."
+  },
+  "get-waybill": {
+   "summary": "Hesabın faturalanmamış irsaliyelerini getir",
+   "description": "Bir hesabın henüz hiçbir faturaya bağlanmamış irsaliye belgelerini sayfalı olarak getirir.\nİsteğe bağlı olarak yöne göre (INCOMING / OUTGOING) filtrelenir; belirtilmezse her iki yön de döner."
+  },
+  "get-waybill-groups": {
+   "summary": "Fatura içe aktarımı için irsaliye gruplarını getir",
+   "description": "Hesabın faturalanmamış irsaliyelerini ve içe aktarılan faturada referans verilen her irsaliye\nnumarasının durumunu döner; isteğe bağlı olarak yöne göre filtrelenebilir."
+  },
+  "get-withholding-payments": {
+   "summary": "Stopaj ödemelerini getir",
+   "description": "Bir dönemin stopaj (muhtasar) ödemelerini MUHSGK `odemeler[]` biçiminde listeler."
+  },
+  "get-workplace": {
+   "summary": "İşyerini ID ile getir",
+   "description": "Verilen firma için belirli bir işyerini ID'si ile getirir"
+  },
+  "global-search": {
+   "summary": "Genel arama yap",
+   "description": "Belirtilen firma için, verilen sorguyla sistem genelinde arama yapar."
+  },
+  "inbox-import-all": {
+   "summary": "Tüm bekleyen gelen kutusu faturalarını içe aktar",
+   "description": "Bekleyen gelen kutusu faturalarının içe aktarımını başlatır ve kuyruğa alınan sayıyı döndürür."
+  },
+  "inbox-import-by-ids": {
+   "summary": "Seçilen bekleyen gelen kutusu faturalarını içe aktar",
+   "description": "İstenen gelen kutusu kalemlerinin (yüklenen belge id'leri ve/veya e-Fatura ETTN'leri) içe aktarımını başlatır\nve kuyruğa alınan sayıyı döndürür. İçe aktarılamayan id'ler (zaten içe aktarılmış, arşivlenmiş,\nuygun olmayan durumda) sessizce atlanır; bu nedenle döndürülen toplam, gönderilen id sayısından\naz olabilir."
+  },
+  "initiate-payment": {
+   "summary": "Ödeme başlat",
+   "description": "Belirtilen firma için bir ödeme (checkout) oturumu başlatır"
+  },
+  "issue-sso-ticket": {
+   "summary": "Giden SSO bileti oluştur",
+   "description": "Hedef sisteme (ör. 'pazaryeri') bu firma olarak giriş yapmak için kısa ömürlü, tek kullanımlık bir bilet döndürür. Ön yüz bu bileti, dönen redirectUrl adresine 'token' form alanı olarak POST eder."
+  },
+  "kt-oauth-callback": {
+   "summary": "KT OAuth geri çağrısını işle",
+   "description": "Yetkilendirme kodunu token'larla değiştirir ve entegrasyonu oluşturur"
+  },
+  "list-acc-plans": {
+   "summary": "Firmanın hesap planını listele",
+   "description": "Hesap planını hesap koduna göre sıralı olarak döndürür. İsteğe bağlı olarak kod veya ad aramasına ve seviyeye göre filtrelenebilir."
+  },
+  "list-account-addresses": {
+   "summary": "Cari adreslerini getir",
+   "description": "Belirli bir carinin adreslerini sayfalı liste olarak getirir",
+   "params": {
+    "companyId": "Firma kimliği",
+    "accountId": "Cari kimliği",
+    "page": "Sayfa numarası (0 tabanlı)",
+    "size": "Sayfa boyutu"
+   }
+  },
+  "list-account-currency-balances": {
+   "summary": "Hesap bakiyelerini döviz bazında getir",
+   "description": "Hesabın kaydı bulunan her para birimindeki bakiyesini, TRY karşılığıyla birlikte endDate itibarıyla döner."
+  },
+  "list-accounting-records": {
+   "summary": "Muhasebe kayıtlarını listele",
+   "description": "Belgeleri muhasebe kayıtlarıyla birlikte sayfalı liste olarak getirir."
+  },
+  "list-activity-codes": {
+   "summary": "Faaliyet kodlarını listele",
+   "description": "Belirtilen firma için DBS'de kayıtlı faaliyet kodlarının listesini getirir"
+  },
+  "list-all-integrations": {
+   "summary": "Tüm entegrasyonları listele",
+   "description": "Bir firmaya ait kayıtlı tüm entegrasyonları listeler"
+  },
+  "list-bank-tag-counts": {
+   "summary": "Banka etiket sayılarını getir",
+   "description": "Aramayla aynı filtreler altında, her etiketi taşıyan bekleyen banka belgesi sayısını döndürür. Etiket filtresini yok sayar; böylece bir etiket seçiliyken de tüm sayılar görünür kalır."
+  },
+  "list-bank-virman-candidates": {
+   "summary": "Virman karşı bacak adaylarını listele",
+   "description": "Verilen hareketin karşı bacağı olabilecek, firmanın diğer banka hesaplarındaki taslak hareketleri, TRY karşılığı en yakın olandan başlayarak listeler."
+  },
+  "list-categories": {
+   "summary": "Kategorileri listele",
+   "description": "Firmanın tüm kategorilerini listeler; isteğe bağlı olarak kategori türüne (PRODUCT, ACCOUNT vb.) göre filtrelenir"
+  },
+  "list-company-client-data-keys": {
+   "summary": "İstemci verisi anahtarlarını listele",
+   "description": "Firmanın desene uyan anahtarlarını listeler; `*` herhangi bir metinle, `?` tek bir karakterle eşleşir."
+  },
+  "list-company-rnd-projects": {
+   "summary": "Firmadaki tüm Ar-Ge projelerini listele"
+  },
+  "list-company-users": {
+   "summary": "Firma kullanıcılarını getir",
+   "description": "Belirtilen firmayla ilişkili tüm kullanıcıların sayfalı listesini getirir"
+  },
+  "list-dealer-customer-subscriptions": {
+   "summary": "Bayi müşterisinin abonelik ve kontör paketlerini listele"
+  },
+  "list-dealer-customers": {
+   "summary": "Bayi müşterilerini listele"
+  },
+  "list-dealer-sales": {
+   "summary": "Bayi müşterilerinin abonelik ve kontör alımlarını listele"
+  },
+  "list-defter": {
+   "summary": "Defterleri listele",
+   "description": "Belirtilen firmanın DBS'deki tüm defterlerini listeler"
+  },
+  "list-departments": {
+   "summary": "İşyerinin tüm departmanlarını getir",
+   "description": "Belirtilen işyeriyle ilişkili tüm departmanların listesini getirir"
+  },
+  "list-document-notes": {
+   "summary": "Belge notlarını listele",
+   "description": "Belge notlarını listeler."
+  },
+  "list-draft-bank-accounts": {
+   "summary": "Taslak banka hesaplarını getir",
+   "description": "Verilen filtrelere uyan taslak banka belgeleri bulunan tüm farklı banka hesaplarını döndürür. bankAccountId filtresini yok sayar; böylece tüm hesaplar her zaman dahil edilir."
+  },
+  "list-e-invoice-attachments": {
+   "summary": "Firmanın e-Fatura eklerini listele",
+   "description": "Firma logosu ve imza eklerini listeler."
+  },
+  "list-employees": {
+   "summary": "Personelleri listele",
+   "description": "Verilen firmanın personellerini sayfalı liste olarak getirir."
+  },
+  "list-fixed-assets": {
+   "summary": "Demirbaşları listele",
+   "description": "Verilen defter yetkisi için aktif demirbaşların (sabit kıymetlerin) sayfalı listesini DBS'den döndürür"
+  },
+  "list-integrations": {
+   "summary": "Entegrasyonları listele",
+   "description": "Entegrasyonları listeler"
+  },
+  "list-invoice-inbox": {
+   "summary": "Gelen e-Faturaları listele (tarih, senaryo, durum, arşiv filtreli)",
+   "description": "Belirtilen kriterlere göre fatura gelen kutusu kayıtlarını listeler.\nBu işlem sayfalama, arama ve filtreleme seçeneklerini destekler."
+  },
+  "list-muavin": {
+   "summary": "Hesap Muavin'ini getir",
+   "description": "Belirli bir hesabın sayfalı Muavin (ayrıntılı defter) kayıtlarını getirir.\nPara birimi, arama sorgusu ve tarih aralığına göre filtrelemeyi destekler."
+  },
+  "list-note-templates": {
+   "summary": "Not şablonlarını listele",
+   "description": "Firmanın kayıtlı fatura notlarını listeler; `q` şablon adına göre filtreler"
+  },
+  "list-orders": {
+   "summary": "Firma siparişlerini getir",
+   "description": "Firmanın siparişlerini sayfalı olarak getirir; isteğe bağlı olarak duruma, hesaba, sipariş numarasına veya yöne göre filtrelenir.\narchived=true istenmedikçe arşivlenmiş siparişler hariç tutulur."
+  },
+  "list-overdue-accounts": {
+   "summary": "Vadesi geçmiş carileri listele",
+   "description": "Açık bakiyesi (alacak veya borç) olan ve vadesi geçmiş belgeleri bulunan cari hesapları listeler."
+  },
+  "list-parsed-documents": {
+   "summary": "Ayrıştırılmış belgeleri listele"
+  },
+  "list-payment-links": {
+   "summary": "Hesabın ödeme bağlantılarını listele",
+   "description": "Verilen hesaba ait tüm aktif ödeme bağlantılarını döner.\nHer kayıt ödeme bağlantısı URL'sini, tutarı ve alıcı e-posta adreslerini içerir."
+  },
+  "list-payroll-deductions": {
+   "summary": "Bordro kesintilerini listele",
+   "description": "Bir personelin ilgili dönemine ait tüm kesintileri döndürür."
+  },
+  "list-payroll-lines": {
+   "summary": "Bordro satırlarını listele",
+   "description": "Bir bordro dönemine ait personel hesaplama satırlarını sayfalı liste olarak döner."
+  },
+  "list-payrolls": {
+   "summary": "Bordroları listele",
+   "description": "Bordro dönemlerini sayfalı liste olarak döner; isteğe bağlı olarak yıla göre filtrelenir. Uyarılar yalnızca hem yıl hem ay verilerek tek bir dönem istendiğinde dahil edilir."
+  },
+  "list-pre-acc-pending": {
+   "summary": "Ön muhasebe bekleyen banka satırlarını listele",
+   "description": "Yalnızca muhasebe hesap koduyla kaydedilmiş banka hareketlerini, o koda zaten kayıt atan tek cari ile birlikte listeler. view=mismatch ile, fişi artık belgeyle uyuşmayan satırları listeler."
+  },
+  "list-product-maps": {
+   "summary": "Ürün-hesap eşleştirme listesini getir (sayfalı)",
+   "description": "Ürün listesini miktarlarıyla birlikte getirir"
+  },
+  "list-products": {
+   "summary": "Firma ürünlerini getir",
+   "description": "Belirtilen firmaya ait tüm ürünleri güncel fiyat listeleriyle birlikte getirir"
+  },
+  "list-products-with-quantity": {
+   "summary": "Ürün listesini miktarlarıyla getir",
+   "description": "Ürün listesini miktarlarıyla birlikte getirir"
+  },
+  "list-sales-offers": {
+   "summary": "Firmanın satış tekliflerini getir",
+   "description": "Firmanın satış tekliflerini sayfalı olarak getirir; isteğe bağlı olarak duruma, cariye veya teklif numarasına göre filtrelenebilir.\narchived=true istenmedikçe arşivlenmiş teklifler hariç tutulur."
+  },
+  "list-sgk-tescil-declarations": {
+   "summary": "SGK bildirgelerini listele",
+   "description": "Firmanın bildirgelerini döndürür"
+  },
+  "list-sgk-tescil-obligations": {
+   "summary": "SGK bildirgesi bekleyen personeli listele",
+   "description": "Bekleyen işe giriş ve işten çıkış bildirgelerini yasal son tarihleriyle birlikte döndürür"
+  },
+  "list-sgk-tescil-syncs": {
+   "summary": "SGK kayıt mutabakatlarını listele",
+   "description": "Çalıştırma özetlerini personel bazındaki kalemler olmadan, en yeniden eskiye doğru döndürür. `OPEN` yalnızca kuyruktaki ve çalışmakta olan çalıştırmaları listeler."
+  },
+  "list-sgk-vizite-notifications": {
+   "summary": "Raporun SGK bildirimlerini listele",
+   "description": "Bu istirahat raporu için SGK'ya bildirilenleri döndürür"
+  },
+  "list-sgk-vizite-reports": {
+   "summary": "SGK istirahat raporlarını listele",
+   "description": "Geçerlilik aralığı istenen zaman aralığıyla örtüşen istirahat raporlarını döndürür"
+  },
+  "list-sgk-work-accidents": {
+   "summary": "SGK iş kazası provizyonlarını listele",
+   "description": "SGK'nın iş kazaları için bildirdiği hastane provizyonlarını döndürür"
+  },
+  "list-stock-transfers": {
+   "summary": "Stok transferlerini listele",
+   "description": "Stok transferlerini ve iç sevk irsaliyelerini en yeniden eskiye doğru listeler."
+  },
+  "list-tags": {
+   "summary": "Firmanın belge etiketlerini listele",
+   "description": "Firma etiketlerini listeler."
+  },
+  "list-timesheets": {
+   "summary": "Dönemin puantajlarını listele",
+   "description": "Verilen yıl/ay için tüm puantajları döndürür."
+  },
+  "list-unused-acc-plans": {
+   "summary": "Kullanılmayan hesap planı kayıtlarını listele",
+   "description": "Kullanılmayan hesap planı kayıtlarını listeler."
+  },
+  "list-uploaded-documents": {
+   "summary": "Yüklenen belgeleri listele",
+   "description": "Belirli bir firma için yüklenen belgelerin sayfalı listesini getirir"
+  },
+  "list-warehouses": {
+   "summary": "Depoları listele",
+   "description": "Firmanın depolarını listeler; her firma adresi için bir depo bulunur. Tam olarak biri varsayılan depodur."
+  },
+  "list-webhooks": {
+   "summary": "Webhook'ları listele",
+   "description": "Firmanın webhook'larını listeler. Gizli anahtarlar (secret) hiçbir zaman döndürülmez."
+  },
+  "list-workplace-rnd-projects": {
+   "summary": "İşyerinin Ar-Ge projelerini listele"
+  },
+  "list-workplaces": {
+   "summary": "Tüm işyerlerini getir",
+   "description": "Belirtilen firmayla ilişkili tüm işyerlerinin listesini getirir"
+  },
+  "mark-accounting-record-undeclared": {
+   "summary": "Muhasebe kayıtlarını beyan edilmemiş işaretle",
+   "description": "Verilen belgenin muhasebe kayıtlarını beyan edilmemiş olarak işaretler."
+  },
+  "mark-sgk-tescil-declaration-voided": {
+   "summary": "Bildirgeyi SGK'da iptal edilmiş olarak işaretle",
+   "description": "Bildirge SGK'nın web arayüzü üzerinden iptal edildikten sonra anahtarı serbest bırakır"
+  },
+  "mark-sgk-tescil-declarations-external": {
+   "summary": "Bildirgeleri Aposkal dışında verilmiş olarak işaretle",
+   "description": "Bildirgenin SGK'nın kendi web arayüzü üzerinden verildiğini kaydeder"
+  },
+  "mark-sgk-vizite-report-read": {
+   "summary": "SGK raporunu okundu işaretle",
+   "description": "Raporu okundu olarak işaretler"
+  },
+  "mark-sgk-vizite-reports-read": {
+   "summary": "SGK raporlarını okundu/okunmadı işaretle",
+   "description": "Verilen raporların okundu bayrağını ayarlar ve kaç tanesinin değiştiğini döndürür"
+  },
+  "mark-sgk-work-accidents-read": {
+   "summary": "SGK iş kazası kayıtlarını okundu/okunmadı işaretle",
+   "description": "Verilen kayıtların okundu bayrağını ayarlar ve kaç tanesinin değiştiğini döndürür"
+  },
+  "matbu": {
+   "summary": "Taslak faturayı matbu fatura olarak kaydet",
+   "description": "Taslak bir faturayı matbu (basılı) fatura formatına dönüştürür.\nMatbu faturalar, Türk vergi mevzuatına uygun, standart önceden basılmış kağıt faturalardır."
+  },
+  "mizan": {
+   "summary": "Mizan raporunu sayfalı getir (tarih/dönem filtreli)",
+   "description": "Mizanı sayfalı yapıda getirir."
+  },
+  "mizan-for-periods": {
+   "summary": "Mizanı muhasebe dönemlerine göre getir",
+   "description": "Dönemlere göre mizanı getirir. İsteğe bağlı tarih ve durum filtreleri desteklenir."
+  },
+  "mizan-for-periods-single-code": {
+   "summary": "Hesap kodu için dönem bazlı mizanı getir",
+   "description": "Belirli bir hesap kodu için dönemlere göre mizanı getirir. İsteğe bağlı tarih aralığı ve durum filtreleri desteklenir."
+  },
+  "muavin": {
+   "summary": "Muavin kayıtlarını sayfalı getir",
+   "description": "Muavini sayfalı yapıda getirir. Hesap kodu, karşı hesap ve tarih aralığına göre filtrelenebilir."
+  },
+  "muavinExport": {
+   "summary": "Muavin verisini dosya olarak dışa aktar",
+   "description": "Muavin verisini Excel dosyası olarak dışa aktarır."
+  },
+  "parsed-document-auto-import-stats": {
+   "summary": "Otomatik içe aktarma sonuç sayıları"
+  },
+  "partially-accept-invoice": {
+   "summary": "Faturayı kısmen kabul et"
+  },
+  "pre-acc-closing": {
+   "summary": "Ön muhasebe kapanışı",
+   "description": "Verilen firma için ön muhasebe kapanış sürecini başlatır ve işlem ID'sini döndürür."
+  },
+  "predict-next-document-no": {
+   "summary": "Sonraki belge numarasını tahmin et",
+   "description": "Bu fatura şu anda resmileştirilseydi alacağı belge numarasını, belirlenen senaryoyla birlikte döndürür.\nNumara yalnızca bilgi amaçlıdır: aynı serideki eşzamanlı bir fatura bu numarayı önce alabilir."
+  },
+  "predictBankDocuments": {
+   "summary": "Banka belgelerini tahmin et",
+   "description": "Banka belgelerini tahmin eder."
+  },
+  "preflight-sgk-tescil": {
+   "summary": "Bildirgeleri göndermeden önce doğrula",
+   "description": "Seçilen personeli SGK'yı çağırmadan SGK kurallarına göre kontrol eder"
+  },
+  "prepare-formalize-document": {
+   "summary": "Belgeyi resmileştirmeye hazırla",
+   "description": "Taslak bir belgeyi, hesabın GİB (Gelir İdaresi Başkanlığı) kayıt durumuna ve vergi bilgilerine göre uygun senaryoyu,\nbelge tipini ve belge detaylarını belirleyerek resmileştirmeye hazırlar.\n\nBu endpoint:\n- Hesabın GİB e-Fatura kullanıcısı olarak kayıtlı olup olmadığını kontrol eder\n- Uygun belge senaryosunu belirler (TICARIFATURA, TEMELFATURA, EARSIVFATURA vb.)\n- KDV istisnası veya tevkifat durumuna göre belge tipini günceller\n- Aynı hesaba ait son belgedeki banka hesaplarını getirir\n- Resmileştirme formu için gereken tüm bilgileri döndürür"
+  },
+  "preview-data-purge": {
+   "summary": "Toplu silmenin kaldıracaklarını önizle",
+   "description": "Kapsam başına kayıt sayılarını, gösterilecek uyarıları ve varsa engelleri döndürür."
+  },
+  "productMap": {
+   "summary": "Ürünleri eşleştir",
+   "description": "Belirtilen firma için ürün eşleştirmesi oluşturur veya günceller"
+  },
+  "query-sgk-work-accidents-by-person": {
+   "summary": "Kişinin iş kazası provizyonlarını SGK'dan sorgula",
+   "description": "Bu kişiye ait tüm provizyonları SGK'dan ister ve dönen sonuçları kaydeder"
+  },
+  "reCreateAllDraft": {
+   "summary": "KDV muhasebe kayıtlarını yeniden oluştur",
+   "description": "Belirtilen firmanın tüm KDV muhasebe kayıtlarını silip yeniden oluşturur."
+  },
+  "reconcile-sgk-tescil-declaration": {
+   "summary": "Belirsiz bildirgeyi mutabakat ile doğrula",
+   "description": "Bildirgenin kaydedilip kaydedilmediğini denetim kaydı ve SGK üzerinden kontrol eder"
+  },
+  "recurring": {
+   "summary": "Tekrarlayan belge oluştur",
+   "description": "Belirtilen firma için, belirtilen belgenin tekrarlayan bir sürümünü oluşturur.\nBu işlem orijinal belgeyi klonlar ve 'RECURRING' durumuyla işaretler.\n\n- **companyId**: Belgenin sahibi olan firmanın ID'si\n- **documentId**: Tekrarlayan hale getirilecek belgenin ID'si"
+  },
+  "reflect-accounting-records": {
+   "summary": "Muhasebe kayıtlarını yansıt",
+   "description": "Gönderilen isteğe göre muhasebe kayıtlarını oluşturur ve yansıtır."
+  },
+  "reject-pending-invoice": {
+   "summary": "Bekleyen faturayı reddet"
+  },
+  "reject-sales-offer": {
+   "summary": "Satış teklifini reddet",
+   "description": "Gönderilmiş bir teklifi müşteri tarafından reddedildi olarak işaretler"
+  },
+  "remove-document-tag": {
+   "summary": "Belgeden etiketi kaldır",
+   "description": "Belgeden etiketi kaldırır."
+  },
+  "reopen-accounting-record": {
+   "summary": "Muhasebe kayıtlarını yeniden aç",
+   "description": "Verilen belgenin onaylanmış muhasebe kayıtlarını düzenleme için yeniden açar."
+  },
+  "request-payment": {
+   "summary": "Cariden ödeme talep et",
+   "description": "CARI türündeki bir hesaptan, ödeme belgelerini hesap sahibiyle paylaşarak\nödeme talebi başlatır."
+  },
+  "resend-sgk-tescil-declaration": {
+   "summary": "Bildirgeyi yeniden gönder",
+   "description": "Reddedilmiş veya başarısız olmuş bir bildirgeyi SGK'ya tekrar gönderir"
+  },
+  "resolve-sgk-tescil-declaration": {
+   "summary": "Belirsiz bildirgeyi elle çözümle",
+   "description": "Bildirgenin SGK'ya ulaşıp ulaşmadığına dair kullanıcının kararını kaydeder"
+  },
+  "revert-accounting-record": {
+   "summary": "Muhasebe kayıtlarını onaylı duruma geri al",
+   "description": "Resmileştirilmiş veya aktarılmış bir belgenin muhasebe kayıtlarını, yeniden düzenlenebilmeleri için onaylanmış (kaydedilmiş) duruma geri alır."
+  },
+  "revoke-category-from-entity": {
+   "summary": "Kayıttan kategoriyi kaldır",
+   "description": "Kayda atanmış kategoriyi kaldırır"
+  },
+  "save-account": {
+   "summary": "Yeni hesap oluştur",
+   "description": "Verilen bilgiler ve belirtilen hesap türüyle yeni bir hesap oluşturur.\nBurada açılan PERSONEL hesabı bir bordro havuz hesabıdır: personel profili veya kimlik numarası\ntaşımaz ve bordroya dahil edilmez."
+  },
+  "save-bank-documents": {
+   "summary": "Banka belgelerini kaydet",
+   "description": "Belirtilen firma ve hesap için banka ekstresi belgelerini kaydeder.\nBanka ekstresi verilerini işler ve belge sisteminde saklar."
+  },
+  "save-bank-documents-by-tag": {
+   "summary": "Bir etiketin bekleyen tüm banka belgelerini kaydet",
+   "description": "Etiketin bekleyen tüm hareketlerini, yön bazında verilen atamayla kaydeder. 100 veya daha fazla hareket içeren kapsam arka planda kaydedilir ve iş kimliğiyle birlikte 202 döner; 409, mevcut sayının expectedTotal ile farklı olduğu ya da aynı kapsamın zaten kaydedilmekte olduğu anlamına gelir."
+  },
+  "save-bank-documents-with-accounting": {
+   "summary": "Banka belgelerini muhasebe kayıtlarıyla kaydet",
+   "description": "Banka belgelerini kaydeder ve ilişkili muhasebe kayıtlarını oluşturur.\nÜrün/hesap seçimini doğrular ve buna göre belge satırları veya ödemeler oluşturur."
+  },
+  "save-company-client-data-value": {
+   "summary": "İstemci verisi değerini kaydet",
+   "description": "Değeri anahtar altına kaydeder; önceki değerin yerine geçer."
+  },
+  "save-employee": {
+   "summary": "Personel oluştur",
+   "description": "Sağlanan bilgilerle yeni bir personel oluşturur."
+  },
+  "save-settings-integration": {
+   "summary": "Entegrasyon oluştur veya güncelle",
+   "description": "Belirtilen firma için yeni bir entegrasyon oluşturur veya mevcut bir entegrasyonu günceller"
+  },
+  "save-timesheet": {
+   "summary": "Puantajı kaydet",
+   "description": "Bir personel için aylık devam kaydını oluşturur veya mevcut kaydın yerine geçirir."
+  },
+  "saveAccountingRecord": {
+   "summary": "Muhasebe kaydını kaydet",
+   "description": "Belirtilen firma için muhasebe kaydı oluşturur."
+  },
+  "search-bank-documents": {
+   "summary": "Banka belgelerinde ara",
+   "description": "Banka belgelerini sayfalama ve filtreleme seçenekleriyle arar.\nTahminler ve benzer belgelerle birlikte sayfalı bir banka belgesi listesi döndürür."
+  },
+  "search-dbs-documents": {
+   "summary": "DBS belgelerinde ara",
+   "description": "DBS belgelerini filtrelerle arar ve sayfalı sonuç döndürür"
+  },
+  "search-tax-payer": {
+   "summary": "VKN/TCKN ile mükellef ara",
+   "description": "Verilen VKN/TCKN için mükellef unvanını, vergi dairesini ve kayıtlı adreslerini döndürür."
+  },
+  "send-sales-offer": {
+   "summary": "Satış teklifini gönder",
+   "description": "Taslak bir teklifi müşteriye gönderildi olarak işaretler"
+  },
+  "set-account-invoice-address": {
+   "summary": "Adresi fatura adresi olarak ayarla",
+   "description": "Belirtilen adresi yeni fatura adresi (Merkez) olarak ayarlar. Önceki fatura adresi yeniden adlandırılır",
+   "params": {
+    "companyId": "Firma kimliği",
+    "accountId": "Cari kimliği",
+    "addressId": "Fatura adresi olarak ayarlanacak adresin kimliği"
+   }
+  },
+  "set-sgk-vizite-report-resolution": {
+   "summary": "SGK raporunun bordro kararını belirle",
+   "description": "Raporu bordroda atlandı olarak işaretler veya yeniden açar"
+  },
+  "share-document": {
+   "summary": "Belgeyi paylaş",
+   "description": "Bir belgeyi belirtilen kullanıcılar veya gruplarla paylaşır."
+  },
+  "start-data-purge": {
+   "summary": "Toplu silmeyi başlat",
+   "description": "Seçilen kapsamların silinmesini kuyruğa alır. Veriler kalıcı olarak silinir."
+  },
+  "start-sgk-tescil-sync": {
+   "summary": "SGK kayıt mutabakatı başlat",
+   "description": "Personel için SGK'da hangi işe giriş ve işten çıkış kayıtlarının bulunduğunu soran bir çalıştırmayı kuyruğa alır"
+  },
+  "submit-sgk-tescil-declarations": {
+   "summary": "SGK bildirgelerini gönder",
+   "description": "Seçilen işe giriş veya işten çıkış bildirgelerini SGK'ya gönderir"
+  },
+  "suggest-bank-ledger": {
+   "summary": "Banka muhasebe hesap kodu öner",
+   "description": "İçe aktarılan fiş hareketleri, banka hesabının ekstre satırlarıyla tarih, tutar ve yön bakımından en iyi eşleşen 102 alt hesaplarını sıralar. En iyisinden başlayarak en fazla beş sonuç döndürür."
+  },
+  "suggest-exit-dressed-wage": {
+   "summary": "Giydirilmiş günlük brüt ücret öner",
+   "description": "Kıdem ve ihbar tazminatı için giydirilmiş günlük brüt ücreti, personelin son 12 aya ait onaylı bordrolarından önerir. Hiçbir şey kaydedilmez; değer yalnızca ön doldurma amaçlıdır."
+  },
+  "tax-detail": {
+   "summary": "Vergi ayrıntılarını getir",
+   "description": "Vergi ayrıntılarını getirir"
+  },
+  "taxpayer-details": {
+   "summary": "GİB'den mükellef bilgisi getir",
+   "description": "GİB'den mükellef bilgilerini getirir"
+  },
+  "test-sgk-workplace-connection": {
+   "summary": "İşyeri için SGK bağlantısını test et",
+   "description": "İşyerinin SGK kimlik bilgilerini hem istirahat (rapor) hem de işe giriş/tescil servisleri için kontrol eder"
+  },
+  "transfer-between-accounts": {
+   "summary": "Hesaplar arası bakiye virmanı yap",
+   "description": "Belirtilen bakiye tutarını aynı firma içinde bir hesaptan diğerine aktarır.\nHer iki hesap da belirtilen firmaya ait olmalıdır."
+  },
+  "transfer-bulk-product": {
+   "summary": "Ürünü toplu transfer et",
+   "description": "Muhasebe kayıtlarını bir üründen başka bir ürüne aktarır."
+  },
+  "transferBulkProduct": {
+   "summary": "Ürünü toplu aktar",
+   "description": "Muhasebe kayıtlarını bir üründen başka bir ürüne aktarır."
+  },
+  "transferToDBS": {
+   "summary": "Belgeyi DBS'ye aktar",
+   "description": "Bu servis bir belgeyi DBS'ye aktarır"
+  },
+  "transferable-documents": {
+   "summary": "DBS'ye aktarılabilecek belgeleri listele",
+   "description": "DBS'ye aktarılacak belgeleri listeler"
+  },
+  "unArchive": {
+   "summary": "Belgeleri arşivden çıkar",
+   "description": "Belirtilen firmaya ait arşivlenmiş belgeleri yeniden aktif duruma getirir.\nArşivden çıkarılan belgeler sistemde yeniden görünür ve düzenlenebilir hale gelir.\n\nİstek gövdesi:\n- Arşivden çıkarılacak belge ID'lerinin listesi"
+  },
+  "unapprove-payroll": {
+   "summary": "Bordro onayını geri al",
+   "description": "APPROVED durumundaki bir bordroyu CALCULATED durumuna geri döndürür ve BORDRO muhasebe belgesini siler."
+  },
+  "unarchive-invoice-inbox": {
+   "summary": "Fatura gelen kutusu kayıtlarını arşivden çıkar",
+   "description": "Belirtilen kriterlere göre fatura gelen kutusu kayıtlarını arşivden çıkarır.\nBu işlem, faturaları mevzuata uyum ve geçmiş takibi amacıyla arşiv depolama alanına taşır.\nÇalıştırmak için uygun yetkiler gerekir."
+  },
+  "unarchive-order": {
+   "summary": "Siparişi arşivden çıkar",
+   "description": "Arşivlenmiş bir siparişi varsayılan listeye geri getirir"
+  },
+  "unarchive-sales-offer": {
+   "summary": "Satış teklifini arşivden çıkar",
+   "description": "Arşivlenmiş bir satış teklifini varsayılan listeye geri getirir"
+  },
+  "unarchive-uploaded-documents": {
+   "summary": "Yüklenen belgeleri arşivden çıkar",
+   "description": "Verilen arşivlenmiş yüklenmiş belgeleri varsayılan listeye geri getirir."
+  },
+  "update-account": {
+   "summary": "Hesabı güncelle",
+   "description": "Hesap bilgilerini verilen ayrıntılarla günceller; yalnızca belirtilen alanlar değişir.\nHesap türü CARI ile RESMIKURUM arasında değiştirilebilir; bu işlem mevcut\ndefter kayıtlarına dokunmaz."
+  },
+  "update-account-address": {
+   "summary": "Cari adresini güncelle",
+   "description": "Belirtilen carinin mevcut bir adresini günceller. Not: Fatura adresi (Merkez) yeniden adlandırılamaz; değiştirmek için set-invoice-address kullanın",
+   "params": {
+    "companyId": "Firma kimliği",
+    "accountId": "Cari kimliği",
+    "addressId": "Adres kimliği"
+   }
+  },
+  "update-account-tax-admin": {
+   "summary": "Hesabın vergi dairesini güncelle",
+   "description": "Belirli bir hesabın vergi dairesi bilgisini günceller."
+  },
+  "update-accounting-record-account": {
+   "summary": "Muhasebe kaydının hesabını güncelle",
+   "description": "Belirli bir muhasebe kaydıyla ilişkili hesabı değiştirir."
+  },
+  "update-accountingRecord-status": {
+   "summary": "Muhasebe kayıtlarının durumunu güncelle",
+   "description": "Belirli bir belgenin muhasebe kayıtlarının durumunu günceller."
+  },
+  "update-auto-prediction": {
+   "summary": "Otomatik tahmini güncelle",
+   "description": "Bir banka entegrasyonu için otomatik tahmini etkinleştirir veya devre dışı bırakır"
+  },
+  "update-category": {
+   "summary": "Kategoriyi güncelle",
+   "description": "Mevcut bir kategoriyi günceller"
+  },
+  "update-company-config": {
+   "summary": "Firma yapılandırmasını güncelle",
+   "description": "Firmanın tüm yapılandırma ayarlarını yeni değerlerle değiştirir"
+  },
+  "update-company-config-key": {
+   "summary": "Belirli bir firma yapılandırmasını güncelle",
+   "description": "Belirli bir firma yapılandırma ayarının değerini günceller"
+  },
+  "update-company-settings": {
+   "summary": "Firma bilgilerini güncelle",
+   "description": "Belirtilen firmanın ayarlarını ve bilgilerini günceller"
+  },
+  "update-department": {
+   "summary": "Departmanı güncelle",
+   "description": "Belirtilen ID'ye sahip mevcut bir departmanı günceller"
+  },
+  "update-document-name": {
+   "summary": "Belge adını güncelle",
+   "description": "Belirli bir belgenin adını günceller."
+  },
+  "update-document-note": {
+   "summary": "Belge notunu güncelle",
+   "description": "Belge notunu günceller."
+  },
+  "update-employee": {
+   "summary": "Personeli güncelle",
+   "description": "Mevcut bir personeli sağlanan alanlarla günceller."
+  },
+  "update-lease-document": {
+   "summary": "Kira belgesini güncelle",
+   "description": "Mevcut bir kira belgesini ID'ye göre günceller."
+  },
+  "update-note-template": {
+   "summary": "Not şablonunu güncelle",
+   "description": "Kayıtlı bir notu günceller; bu notu daha önce kullanmış faturalar kendi kopyalarını korur"
+  },
+  "update-order": {
+   "summary": "Siparişi güncelle",
+   "description": "Taslak bir siparişi günceller ve satırlarını değiştirir. Yalnızca taslak siparişler güncellenebilir"
+  },
+  "update-payroll-parameters": {
+   "summary": "Çocuk yardımı gelir vergisi istisnasını güncelle",
+   "description": "Dönemi belirleyen parametre satırında her iki yaş grubu için çocuk başına aylık gelir vergisi istisnasını ayarlar. Tutarlar merkezi değerler olduğundan yazma yetkisi platform yöneticileriyle sınırlıdır."
+  },
+  "update-product": {
+   "summary": "Mevcut ürünü güncelle",
+   "description": "Mevcut bir ürünün bilgilerini günceller. Fiyat listelerinde akıllı güncelleme yapar: yenilerini ekler, mevcutları günceller, eksik olanları kaldırır"
+  },
+  "update-production": {
+   "summary": "Üretim kaydını güncelle",
+   "description": "Mevcut bir üretim kaydını ve ona bağlı (referans verilen) belgeyi günceller.\n\n**Temel süreç özellikleri:**\n1. **Akıllı stok doğrulaması:** Güncelleme sırasında mevcut çıkış belgesindeki miktarlar sanal olarak stoğa geri eklenir. Böylece stok seviyeleri yalnızca yeni talebin farkına (delta) göre kontrol edilir.\n2. **Otomatik bağlantı tespiti:** Sistem, verilen `documentId`'nin Girdi (`OUTGOING`) mi yoksa Çıktı (`INCOMING`) belgesine mi ait olduğunu otomatik olarak belirler ve her iki belgeyi de yönetir.\n3. **Veri bütünlüğü:** Tutarlılığı sağlamak için mevcut belge satırları ve muhasebe kayıtları silinir ve yeni talebe göre yeniden oluşturulur.\n4. **İşçilik maliyeti entegrasyonu:** Hammadde ve işçilik maliyetlerini mamul ürün değeriyle dengeleyerek toplam maliyeti yeniden hesaplar."
+  },
+  "update-profile": {
+   "summary": "Profili güncelle",
+   "description": "Kullanıcının profil bilgilerini günceller."
+  },
+  "update-sales-offer": {
+   "summary": "Satış teklifini güncelle",
+   "description": "Taslak bir satış teklifini günceller ve satırlarını değiştirir. Yalnızca taslak teklifler güncellenebilir"
+  },
+  "update-tag": {
+   "summary": "Belge etiketini güncelle",
+   "description": "Etiketi günceller."
+  },
+  "update-warehouse": {
+   "summary": "Depoyu güncelle",
+   "description": "Bir depoyu yeniden adlandırır, aktif/pasif yapar veya varsayılan depo yapar. Bir depo varsayılan yapıldığında önceki varsayılan depo bu durumdan çıkar."
+  },
+  "update-webhook": {
+   "summary": "Webhook'u güncelle",
+   "description": "URL'yi değiştirir veya webhook'u açar/kapatır. Yeni bir URL, oluşturmadaki gibi doğrulanır."
+  },
+  "update-workplace": {
+   "summary": "İşyerini güncelle",
+   "description": "Belirtilen ID'ye sahip mevcut bir işyerini günceller"
+  },
+  "update-workplace-rnd-project": {
+   "summary": "Ar-Ge projesini güncelle"
+  },
+  "updateAccPlan": {
+   "summary": "Hesap planı kaydını güncelle",
+   "description": "Mevcut bir hesap planı kaydını günceller."
+  },
+  "updateAccountingRecord": {
+   "summary": "Muhasebe kayıtlarını güncelle",
+   "description": "Belirtilen belgenin muhasebe kayıtlarını günceller."
+  },
+  "updateBulkAccPlan": {
+   "summary": "Hesap planını toplu aktar",
+   "description": "Bir tarih aralığındaki muhasebe kayıtlarını bir hesap planından diğerine aktarır. Yalnızca belge durumu FORMALIZED veya TRANSFERRED OLMAYAN kayıtlar aktarılır."
+  },
+  "updateDocument": {
+   "summary": "Belgeyi güncelle",
+   "description": "Belirtilen firmaya ait, verilen ID'ye sahip belgeyi günceller."
+  },
+  "upload-document": {
+   "summary": "Belge yükle",
+   "description": "Tek bir belge yükler veya sıkıştırılmış bir arşivden dosyaları çıkarıp yükler.\nYüklenen belgelerin ID'lerini döndürür; sıkıştırılmış bir arşiv birden fazla belge üretebilir."
+  },
+  "upload-e-invoice-attachment": {
+   "summary": "Firmanın e-Fatura ekini yükle",
+   "description": "Firma logosu veya imza eki yükler."
+  },
+  "verify-document-code": {
+   "summary": "Belge doğrulama kodunu kontrol et"
+  }
+ },
+ "schemaProperties": {
+  "DocumentDetailedReportRowResponse.total": "Belge para birimi cinsinden belge toplamı",
+  "DocumentDetailedReportRowResponse.tagNames": "Virgülle birleştirilmiş etiket adları",
+  "DocumentDetailedReportRowResponse.netTotal": "KDV hariç toplam",
+  "TodoReport.hasNegativeStock": "Her zaman false; artık hesaplanmıyor",
+  "DocumentSeriesGapRangeResponse.leading": "Boşluk 1 numarasından, yılın ilk belgesinden önce başlıyorsa true",
+  "DocumentSeriesGapRangeResponse.periods": "Boşluğun ait olabileceği muhasebe dönemleri",
+  "DocumentSeriesGapResponse.year": "Belge numaralarının yıl bileşeni",
+  "DocumentSeriesGapResponse.documentCount": "Yıl için taranan belge sayısı",
+  "DocumentSeriesGapResponse.cancelled": "İptal edilen ve reddedilen belgeler; numaraları seride yine yer kaplar",
+  "DocumentSeriesGapResponse.duplicates": "Birden fazla belgede kullanılan numaralar",
+  "DocumentSeriesGapResponse.unparseable": "Numarası resmî numara biçimine uymayan belgeler",
+  "DocumentSeriesGapSeriesResponse.seriType": "Senaryoların paylaştığı seri türü; dışarıdan numaralanan serilerde null",
+  "DocumentSeriesGapSeriesResponse.first": "Serideki en küçük numara",
+  "DocumentSeriesGapSeriesResponse.last": "Serideki en büyük numara",
+  "DocumentSeriesGapSeriesResponse.gapCount": "Serideki toplam eksik numara sayısı",
+  "BankLedgerSuggestionResponse.accPlanId": "Önerilen 102 alt hesabının hesap planı id'si.",
+  "BankLedgerSuggestionResponse.accCode": "Önerilen 102 alt hesabının muhasebe kodu.",
+  "BankLedgerSuggestionResponse.accName": "Önerilen 102 alt hesabının adı.",
+  "BankLedgerSuggestionResponse.matchedRows": "Banka hesabının, bu alt hesaptaki bir hareketle tarih, tutar ve yön bakımından eşleşen ekstre satırları.",
+  "BankLedgerSuggestionResponse.statementRows": "Eşleşmenin oran olarak okunabilmesi için banka hesabının tüm ekstre satırları."
+ }
+}

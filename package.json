@@ -1,0 +1,62 @@
+{
+  "name": "aposkal-mcp",
+  "version": "0.1.0",
+  "description": "Aposkal muhasebe API'si için Model Context Protocol (MCP) sunucusu. Geliştiren: Switas Consultancy (https://switas.com).",
+  "type": "module",
+  "bin": {
+    "aposkal-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "openapi",
+    "i18n",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "start": "node dist/index.js",
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "setup:hooks": "git config core.hooksPath .githooks",
+    "prepublishOnly": "npm run check:secrets && npm run typecheck && npm test && npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "aposkal",
+    "muhasebe",
+    "on-muhasebe",
+    "e-fatura",
+    "e-arsiv",
+    "gib",
+    "claude"
+  ],
+  "author": "Switas Consultancy (https://switas.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/switaslabs/aposkal-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/switaslabs/aposkal-mcp/issues"
+  },
+  "homepage": "https://github.com/switaslabs/aposkal-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.1"
+  }
+}

@@ -1,0 +1,28 @@
+# Bağımlılıklar ve derleme çıktısı
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Gizli bilgiler — gerçek kimlik bilgilerini asla commit etmeyin
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# İndirilen Aposkal dosyaları (fatura, PDF, XML) kişisel/ticari veri içerebilir
+downloads/
+*.pdf
+!docs/**/*.pdf
+
+# Yerel editör / işletim sistemi
+.DS_Store
+.idea/
+.vscode/
+*.log
+npm-debug.log*
+
+# Yerel Claude ayarları
+.claude/settings.local.json

@@ -1,0 +1,20 @@
+aposkal-mcp
+Telif hakkı (c) 2026 Switas Consultancy — https://switas.com
+
+Bu proje Switas Consultancy (https://switas.com) tarafından geliştirilmekte ve
+sürdürülmektedir. Bağımsız bir topluluk entegrasyonudur; Aposkal'ın resmî ürünü
+değildir ve Aposkal tarafından onaylanmamıştır.
+
+Üçüncü taraf içerikler
+----------------------
+- "Aposkal" adı ve Aposkal logosu sahibinin markalarıdır. assets/ klasöründeki
+  logo yalnızca bu entegrasyonun Aposkal hizmetiyle ilişkisini belirtmek için
+  kullanılmıştır ve bu projenin MIT lisansı kapsamında değildir.
+
+- openapi/aposkal-openapi.json, Aposkal'ın https://apidocs.aposkal.com/ adresinde
+  yayımladığı herkese açık Aposkal API V1 OpenAPI tanımıdır. Başvuru ve araç
+  üretimi amacıyla değiştirilmeden eklenmiştir; tüm hakları sahibine aittir ve
+  bu projenin MIT lisansı kapsamında değildir.
+
+- i18n/aposkal-tr.json, bu tanımdaki İngilizce özet ve açıklamaların Switas
+  Consultancy tarafından hazırlanmış Türkçe karşılıklarını içerir.
