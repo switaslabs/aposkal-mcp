@@ -237,7 +237,8 @@ Aşağıdaki tabloda her alanda neler yapılabildiği ve bunun hangi ayarla aç�
 
 ### Teknik sınırlamalar
 
-- **Uzak modda tek token.** Vercel kurulumunda erişim tek bir paylaşılan token ile korunur. Kullanıcı bazlı oturum açma (OAuth) henüz yok; token'ı bilen herkes sunucunun tüm yetkileriyle işlem yapar.
+- **Uzak modda tek erişim parolası.** Vercel kurulumunda erişim, tek bir paylaşılan parola (`MCP_AUTH_TOKEN`) ile korunur. Claude.ai bağlantısı OAuth ile yapılır ama giriş sayfası da bu parolayı ister; ayrı kullanıcı hesapları yoktur. Parolayı bilen herkes sunucunun tüm yetkileriyle işlem yapar.
+- **OAuth anahtarları tek tek iptal edilemez.** Veritabanı kullanılmadığı için verilen erişim anahtarları (1 saat) ve yenileme anahtarları (30 gün) süreleri dolana kadar geçerlidir. Hepsini birden iptal etmek için `MCP_AUTH_TOKEN` değerini değiştirip yeniden deploy edin.
 - **Uzak mod durumsuzdur.** Oturum tutulmaz, sunucudan istemciye bildirim akışı (SSE) yoktur. Her istek yalnızca POST ile yapılır.
 - **Tek anahtar, tek kullanıcı.** Her sunucu örneği tek bir API anahtarıyla çalışır ve o anahtarın kullanıcısının yetkilerini taşır.
 - **Büyük yanıtlar kırpılır.** Asistana dönen yanıt `APOSKAL_MAX_RESPONSE_CHARS` (varsayılan 60.000 karakter) ile sınırlıdır. Uzun listelerde `page` ve `size` parametrelerini kullanın.
@@ -290,7 +291,8 @@ Bu sunucu **gerçek muhasebe verisine** erişir. Her operasyon aşağıdaki beş
 
 | Koruma | Açıklama |
 |---|---|
-| Uzak mod token'ı | Vercel kurulumunda `MCP_AUTH_TOKEN` (en az 32 karakter) zorunludur. Token yoksa sunucu hiçbir isteğe hizmet vermez. Token sabit süreli karşılaştırılır. CORS açılmaz. |
+| Uzak mod token'ı | Vercel kurulumunda `MCP_AUTH_TOKEN` (en az 32 karakter) zorunludur. Token yoksa sunucu hiçbir isteğe hizmet vermez. Token sabit süreli karşılaştırılır. |
+| OAuth 2.1 | Claude.ai bağlantısı için PKCE (S256) zorunlu. Yalnızca Claude'un resmî geri dönüş adreslerine ve yerel adreslere yönlendirilir. Anahtarlar imzalı ve kısa ömürlüdür. Giriş sayfası çerçeve içine alınamaz ve hatalı parola denemeleri yavaşlatılır. |
 | Gizli araçlar | İzin verilmeyen araçlar istemciye hiç listelenmez. Yine de her çağrı yürütme anında yeniden denetlenir. |
 | Firma izin listesi | `APOSKAL_COMPANY_IDS` dışındaki firmalara erişim reddedilir. |
 | SSRF koruması | API adresi `APOSKAL_ENV` ile sabittir. Yol parametreleri doğrulanır ve encode edilir. `../`, `/` ve `//` reddedilir. |
@@ -491,7 +493,7 @@ node --env-file=.env dist/index.js
 
 ## Vercel'e kurulum
 
-Sunucuyu [Vercel](https://vercel.com) üzerinde, token ile korunan bir uzak MCP sunucusu olarak çalıştırabilirsiniz. Böylece bilgisayarınızda Node.js kurmadan, Claude'un web ve mobil sürümleri dahil uzak MCP destekleyen istemcilerden bağlanabilirsiniz.
+Sunucuyu [Vercel](https://vercel.com) üzerinde, token ile korunan bir uzak MCP sunucusu olarak çalıştırabilirsiniz. Böylece bilgisayarınızda Node.js kurmadan bağlanabilirsiniz. **Claude.ai** (web, masaüstü, mobil) OAuth ile bağlanır; Claude Code ve diğer istemciler token ya da OAuth kullanabilir.
 
 > ⚠️ **Önemli:** Uzak kurulumda Aposkal API anahtarınız Vercel'de saklanır ve sunucu internetten erişilebilir hale gelir. **Token'ı bilen herkes** sunucunun yetkileriyle Aposkal verinize erişebilir. Token'ı bir parola gibi saklayın, yalnızca güvendiğiniz kişilerle paylaşın ve `APOSKAL_COMPANY_IDS` ile firmaları sınırlayın.
 
@@ -538,13 +540,29 @@ Diğer tüm ayarlar [Yapılandırma](#yapılandırma) tablosundakiyle aynıdır.
 
 Sunucu adresi `https://<proje-adı>.vercel.app/api/mcp` olur. Kök adreste (`/`) kurulumu anlatan bir açılış sayfası açılır.
 
-Claude Code:
+#### Claude.ai (web, masaüstü, mobil)
+
+1. Claude.ai'de **Settings → Connectors → Add custom connector** yolunu açın.
+2. Ad olarak `Aposkal` yazın, URL olarak `https://<proje-adı>.vercel.app/api/mcp` girin. **Advanced settings** içindeki OAuth Client ID/Secret alanlarını **boş bırakın**.
+3. **Add** ve ardından **Connect** düğmesine basın. Tarayıcıda Aposkal MCP'nin Türkçe giriş sayfası açılır.
+4. **Erişim parolası** alanına `MCP_AUTH_TOKEN` değerini girip **İzin ver ve bağlan** düğmesine basın.
+5. Claude.ai'ye geri yönlendirilirsiniz. Bağlayıcı artık sohbetlerde kullanılabilir.
+
+Claude erişim anahtarını kendisi yeniler. Parolayı yeniden girmeniz yalnızca 30 günlük yenileme süresi dolduğunda ya da `MCP_AUTH_TOKEN` değiştiğinde gerekir.
+
+> Ekip veya kurumsal planlarda özel bağlayıcıları yalnızca yöneticiler ekleyebilir.
+
+#### Claude Code
 
 ```bash
 claude mcp add --transport http aposkal https://<proje-adı>.vercel.app/api/mcp --header "Authorization: Bearer <token>"
 ```
 
-`Authorization` başlığı ekleyebilen diğer MCP istemcileri:
+Claude Code OAuth da destekler. `--header` vermeden eklerseniz, tarayıcıda aynı giriş sayfası açılır.
+
+#### Diğer MCP istemcileri
+
+`Authorization` başlığı ekleyebilen istemciler:
 
 ```json
 {
@@ -557,11 +575,21 @@ claude mcp add --transport http aposkal https://<proje-adı>.vercel.app/api/mcp 
 }
 ```
 
-> Bazı istemciler (ör. yalnızca OAuth destekleyen bağlayıcılar) özel başlık eklemeye izin vermez. Bu istemciler şimdilik desteklenmiyor.
+OAuth destekleyen istemciler başlık gerektirmez. Bu istemcilerde yalnızca URL'yi girmeniz yeterli; giriş sayfası açılır.
 
 ### Uzak moda özel davranışlar
 
-- **Token zorunlu.** `MCP_AUTH_TOKEN` yoksa veya 32 karakterden kısaysa sunucu tüm isteklere `503` döner. Token yanlışsa `401` döner.
+- **Token zorunlu.** `MCP_AUTH_TOKEN` yoksa veya 32 karakterden kısaysa sunucu tüm isteklere `503` döner. Token yanlışsa `401` döner. `401` yanıtı, istemcilerin OAuth giriş servisini bulabilmesi için meta veri adresini de taşır.
+- **İki giriş yolu.** İstek ya `MCP_AUTH_TOKEN` değerinin kendisini ya da OAuth ile alınmış erişim anahtarını taşımalıdır. OAuth'u tamamen kapatmak için `MCP_OAUTH_ENABLED=false` ayarlayın.
+- **OAuth uçları:**
+  - `/.well-known/oauth-protected-resource`
+  - `/.well-known/oauth-authorization-server`
+  - `/api/oauth/register`
+  - `/api/oauth/authorize`
+  - `/api/oauth/token`
+- **İsteğe bağlı OAuth ayarları:**
+  - `MCP_PUBLIC_URL`: Özel alan adı kullanıyorsanız sabit kök adres, ör. `https://mcp.firmaniz.com`.
+  - `MCP_OAUTH_REDIRECT_URIS`: Claude dışındaki istemciler için ek geri dönüş adresleri, virgülle ayrılmış, yalnızca https.
 - **Sadece POST.** Sunucu durumsuz (stateless) Streamable HTTP kullanır.
 - **Dosyalar kaydedilmez.** Belgeler için imzalı CDN linki döner.
 - **Süre sınırı.** İstek süresi en fazla 60 saniyedir (`vercel.json` → `maxDuration`).
@@ -598,7 +626,8 @@ claude mcp add --transport http aposkal https://<proje-adı>.vercel.app/api/mcp 
 |---|---|
 | Kimlik doğrulama, firma listesi, KDV oranları, cari arama, belge listesi | ✅ Canlı ortamda |
 | Belge indirme linki (CDN yönlendirmesi) | ✅ Canlı ortamda |
-| Uzak (HTTP) mod: token doğrulama, araç listesi, canlı okuma çağrıları | ✅ Yerel Vercel simülasyonunda (gerçek Vercel'e henüz deploy edilmedi) |
+| Uzak (HTTP) mod: token doğrulama, araç listesi, canlı okuma çağrıları | ✅ Yerel Vercel simülasyonunda |
+| OAuth akışı (keşif → kayıt → giriş → token → canlı çağrı) | ✅ Otomatik testlerde ve yerel simülasyonda. Claude.ai ile gerçek bağlantı ilk deploy'dan sonra doğrulanacak. |
 | Vadesi geçmiş ödeme raporu, e-Fatura mükellef sorgusu | ✅ Canlı ortamda |
 | Yalnızca bearer olarak belgelenmiş uçlar (depo, stok transferi, ayrıştırılmış belgeler) | ✅ Canlı ortamda, API anahtarıyla çalıştı |
 | Fatura taslağı hesaplaması (`dryRun`) | ✅ Canlı ortamda (yalnızca GET istekleri) |
@@ -621,6 +650,9 @@ Yazma araçlarını ilk kez kullanırken önce `dryRun` veya test ortamı (`APOS
 | `400 … E-Fatura mükellefine E-arşiv fatura gönderilemez` | Senaryo yanlış. `aposkal_check_einvoice_recipient` ile kontrol edin ya da fatura aracında `scenario: "AUTO"` kullanın. |
 | Yanıt `…[kırpıldı…]` ile bitiyor | Yanıt çok büyük. `size` parametresini küçültün ya da sonraki sayfayı (`page`) isteyin. |
 | Vercel'de `401 Yetkisiz` | `Authorization: Bearer <token>` başlığı eksik veya token yanlış. |
+| Claude.ai: "Couldn't register with … sign-in service" | Sunucu eski sürümde (OAuth yok) ya da OAuth kapalı (`MCP_OAUTH_ENABLED=false`). Son sürümü deploy edin. Bağlayıcıda OAuth Client ID alanını boş bırakın. |
+| Giriş sayfasında "Geri dönüş adresi bu istemci için kayıtlı değil" | İstemci, izin listesinde olmayan bir adres kullanıyor. Claude dışı bir istemciyse adresini `MCP_OAUTH_REDIRECT_URIS` değişkenine ekleyin. |
+| Claude.ai bağlantısı bir süre sonra kopuyor | `MCP_AUTH_TOKEN` değiştiyse tüm anahtarlar geçersiz olur. Bağlayıcıda **Disconnect** ve ardından **Connect** yapıp parolayı yeniden girin. |
 | Vercel'de `503 Sunucu yapılandırılmamış` | Zorunlu bir ortam değişkeni eksik veya `MCP_AUTH_TOKEN` 32 karakterden kısa. Ayrıntı Vercel'in fonksiyon loglarında yazar. Değişkenleri düzelttikten sonra yeniden deploy edin. |
 | Araç listede görünmüyor | Güvenlik ayarları izin vermiyor ya da araç bir toolset'e ait ve o grup açılmamış. `aposkal_search_endpoints` ile arayabilir, `aposkal_call_endpoint` ile çağırabilirsiniz. |
 
@@ -651,10 +683,12 @@ npm run typecheck && npm run build
 ```
 api/
   mcp.js            Vercel Function giriş noktası (uzak mod)
+  oauth/            OAuth uçları (meta veri, kayıt, giriş, token)
 public/             Vercel açılış sayfası
 src/
   index.ts          giriş noktası (stdio, yerel mod)
   http-handler.ts   uzak (HTTP) mod: token doğrulama, durumsuz MCP
+  oauth.ts          OAuth 2.1 yetkilendirme sunucusu (Claude.ai bağlayıcıları)
   server.ts         MCP sunucusu, araç kaydı
   config.ts         ortam değişkenleri ve doğrulama
   policy.ts         güvenlik politikası (tek karar noktası)

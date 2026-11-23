@@ -26,4 +26,9 @@
   - token korumalı, durumsuz Streamable HTTP (`api/mcp.js`)
   - `vercel.json` ve Türkçe açılış sayfası
   - "Vercel'e kur" düğmesi
+- Claude.ai bağlayıcıları için OAuth 2.1 desteği:
+  - korunan kaynak ve yetkilendirme sunucusu meta verisi
+  - dinamik istemci kaydı
+  - PKCE zorunlu, Türkçe giriş sayfası
+  - imzalı ve süreli erişim/yenileme anahtarları (veritabanı gerektirmez)
 - Commit öncesi kanca (pre-commit hook) ve CI'da gizli bilgi taraması (gitleaks), Dependabot.

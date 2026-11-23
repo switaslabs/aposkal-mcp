@@ -44,14 +44,16 @@
 
   <section>
     <h2>Bağlantı adresi</h2>
-    <p>MCP uç noktası: <code>/api/mcp</code> (Streamable HTTP, yalnızca POST). Her istek, sunucuyu kuran kişinin verdiği token ile yapılmalıdır.</p>
+    <p>MCP uç noktası: <code>/api/mcp</code> (Streamable HTTP).</p>
+    <p><strong>Claude.ai:</strong> <em>Settings → Connectors → Add custom connector</em> yolundan bu adresin sonuna <code>/api/mcp</code> ekleyerek girin. Bağlanırken açılan sayfada sunucuyu kuran kişinin verdiği erişim parolasını yazın.</p>
+    <p><strong>Claude Code:</strong></p>
     <pre>claude mcp add --transport http aposkal https://BU-ADRES/api/mcp --header "Authorization: Bearer &lt;token&gt;"</pre>
   </section>
 
   <section>
     <h2>Güvenlik</h2>
     <ul>
-      <li>Token olmadan hiçbir araç çalışmaz.</li>
+      <li>Erişim parolası ya da OAuth ile alınmış kısa ömürlü anahtar olmadan hiçbir araç çalışmaz.</li>
       <li>Varsayılan mod salt-okumadır.</li>
       <li>GİB'e ya da SGK'ya veri gönderen işlemler ayrıca açılmadıkça kapalıdır ve kullanıcı onayı (<code>confirm</code>) ister.</li>
       <li>API anahtarları yalnızca sunucu ortam değişkenlerinde tutulur. Bu sayfada ya da yanıtlarda asla görünmez.</li>
