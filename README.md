@@ -2,12 +2,13 @@
 
 <img src="assets/aposkal-mcp-icon.png" alt="Aposkal MCP" width="160" height="160">
 
-# Aposkal MCP Server
+# Aposkal MCP Server (Resmî Olmayan)
 
-**Aposkal muhasebe API'si için Model Context Protocol (MCP) sunucusu**
+**Aposkal muhasebe API'si için resmî olmayan Model Context Protocol (MCP) sunucusu**
 
 Geliştiren: **[Switas Consultancy](https://switas.com)**
 
+[![Resmî Olmayan](https://img.shields.io/badge/Aposkal-Resm%C3%AE%20Olmayan-orange.svg)](#resmî-olmayan-entegrasyon)
 [![Lisans: MIT](https://img.shields.io/badge/lisans-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-339933.svg)](https://nodejs.org)
 [![MCP](https://img.shields.io/badge/MCP-stdio%20%7C%20HTTP-6E56CF.svg)](https://modelcontextprotocol.io)
@@ -18,11 +19,17 @@ Geliştiren: **[Switas Consultancy](https://switas.com)**
 
 ---
 
-**aposkal-mcp**, [Aposkal](https://aposkal.com) ön muhasebe ve muhasebe platformunu Claude gibi yapay zekâ asistanlarına bağlayan açık kaynak bir [MCP](https://modelcontextprotocol.io) sunucusudur. **[Switas Consultancy](https://switas.com)** tarafından geliştirilmekte ve sürdürülmektedir.
+**aposkal-mcp**, [Aposkal](https://aposkal.com) ön muhasebe ve muhasebe platformunu Claude gibi yapay zekâ asistanlarına bağlayan **resmî olmayan**, açık kaynak bir [MCP](https://modelcontextprotocol.io) sunucusudur. **[Switas Consultancy](https://switas.com)** tarafından geliştirilmekte ve sürdürülmektedir.
 
 Asistanınıza "geçen ayın kâr-zarar raporunu çıkar", "vadesi geçmiş alacakları listele" ya da "bu müşteri e-Fatura mükellefi mi?" diye sorabilirsiniz. Sunucu doğru Aposkal API çağrısını yapar ve sonucu asistana iletir. Aposkal API'sinin sunduğu **430 operasyonun tamamına** erişilebilir. Varsayılan ayar **salt-okumadır**: siz açıkça izin vermeden hiçbir kayıt değişmez ve GİB'e ya da SGK'ya hiçbir şey gönderilmez.
 
-> **Bağımsızlık notu:** Bu proje bağımsız bir topluluk entegrasyonudur. Aposkal'ın resmî ürünü değildir ve Aposkal tarafından onaylanmamıştır. "Aposkal" adı ve logosu sahibine aittir, burada yalnızca entegrasyonu tanımlamak için kullanılmıştır. Ayrıntılar için [NOTICE](NOTICE) dosyasına bakın.
+### Resmî olmayan entegrasyon
+
+> [!IMPORTANT]
+> **Bu, resmî olmayan bir MCP sunucusudur.** Aposkal tarafından geliştirilmemiştir, Aposkal tarafından onaylanmamıştır ve Aposkal'ın desteği kapsamında değildir. [Switas Consultancy](https://switas.com) tarafından geliştirilen bağımsız bir entegrasyondur ve yalnızca Aposkal'ın herkese açık API'sini kullanır.
+>
+> - Bu sunucuyla ilgili sorun ve önerileriniz için Aposkal'a değil, bu reponun [issue](https://github.com/switaslabs/aposkal-mcp/issues) sayfasına yazın.
+> - "Aposkal" adı ve logosu sahibine aittir; burada yalnızca entegrasyonu tanımlamak için kullanılmıştır. Ayrıntılar için [NOTICE](NOTICE) dosyasına bakın.
 
 ## İçindekiler
 
@@ -723,7 +730,7 @@ Katkılar, hata bildirimleri ve öneriler için [issue](https://github.com/swita
 
 <img src="assets/aposkal-mcp-icon.png" alt="" width="48" align="left">
 
-**aposkal-mcp**, **[Switas Consultancy](https://switas.com)** tarafından geliştirilmekte ve sürdürülmektedir.
+**aposkal-mcp**, **[Switas Consultancy](https://switas.com)** tarafından geliştirilmekte ve sürdürülmektedir. Aposkal'ın resmî ürünü değildir.
 
 Kurumunuz için yapay zekâ entegrasyonları, MCP sunucuları veya muhasebe otomasyonu ihtiyaçlarınız için [switas.com](https://switas.com) üzerinden bize ulaşabilirsiniz.
 

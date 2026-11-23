@@ -1,6 +1,6 @@
 # Güvenlik Politikası
 
-**aposkal-mcp**, [Switas Consultancy](https://switas.com) tarafından geliştirilmekte ve sürdürülmektedir.
+**aposkal-mcp**, [Switas Consultancy](https://switas.com) tarafından geliştirilmekte ve sürdürülmektedir. Aposkal için **resmî olmayan** bir MCP sunucusudur.
 
 ## Güvenlik açığı bildirimi
 

@@ -110,6 +110,7 @@ describe("OAuth (Claude.ai bağlayıcıları)", () => {
     expect(page.status).toBe(200);
     const html = await page.text();
     expect(html).toContain("Erişim parolası");
+    expect(html).toContain("Resmî olmayan");
     expect(html).not.toContain(TOKEN);
     expect(page.headers.get("content-security-policy")).toContain("frame-ancestors 'none'");
 

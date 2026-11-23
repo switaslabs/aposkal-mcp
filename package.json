@@ -1,7 +1,7 @@
 {
   "name": "aposkal-mcp",
   "version": "0.1.0",
-  "description": "Aposkal muhasebe API'si için Model Context Protocol (MCP) sunucusu. Geliştiren: Switas Consultancy (https://switas.com).",
+  "description": "Aposkal muhasebe API'si için resmî olmayan Model Context Protocol (MCP) sunucusu. Geliştiren: Switas Consultancy (https://switas.com). Aposkal tarafından onaylanmamıştır.",
   "type": "module",
   "bin": {
     "aposkal-mcp": "dist/index.js"
@@ -38,7 +38,9 @@
     "e-fatura",
     "e-arsiv",
     "gib",
-    "claude"
+    "claude",
+    "unofficial",
+    "resmi-olmayan"
   ],
   "author": "Switas Consultancy (https://switas.com)",
   "license": "MIT",

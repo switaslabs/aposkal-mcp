@@ -8,7 +8,7 @@ import { execute, type ExecContext } from "../executor.js";
 import { decide, PolicyError } from "../policy.js";
 import { RISK_DESCRIPTIONS, type Risk } from "../risk.js";
 import type { Operation, Spec } from "../spec.js";
-import { AUTHOR, AUTHOR_URL, NAME, VERSION } from "../version.js";
+import { AUTHOR, AUTHOR_URL, NAME, UNOFFICIAL_NOTE, VERSION } from "../version.js";
 import { inputSchemaFor } from "./generated.js";
 import type { ToolDef } from "./types.js";
 
@@ -95,7 +95,7 @@ export function metaTools(spec: Spec, ctx: ExecContext): ToolDef[] {
     {
       name: "aposkal_server_info",
       title: "Sunucu bilgisi",
-      description: `${NAME} sunucusunun sürümünü, ortamını (live/test), güvenlik modunu ve açık grupları gösterir. Kimlik bilgilerini asla göstermez. Geliştiren: ${AUTHOR} (${AUTHOR_URL}).`,
+      description: `Resmî olmayan ${NAME} sunucusunun sürümünü, ortamını (live/test), güvenlik modunu ve açık grupları gösterir. Kimlik bilgilerini asla göstermez. Geliştiren: ${AUTHOR} (${AUTHOR_URL}).`,
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
       risk: "read",
       method: "GET",
@@ -103,6 +103,8 @@ export function metaTools(spec: Spec, ctx: ExecContext): ToolDef[] {
         JSON.stringify(
           {
             ad: NAME,
+            resmiUrun: false,
+            not: UNOFFICIAL_NOTE,
             surum: VERSION,
             gelistiren: AUTHOR,
             webSitesi: AUTHOR_URL,

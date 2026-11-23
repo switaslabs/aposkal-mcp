@@ -156,7 +156,7 @@ export function protectedResourceMetadata(req: Request, opts: OAuthOptions): Res
       resource: resourceUrl(req, opts),
       authorization_servers: [origin(req, opts)],
       bearer_methods_supported: ["header"],
-      resource_name: "Aposkal MCP — Switas Consultancy",
+      resource_name: "Aposkal MCP (Resmî Olmayan) — Switas Consultancy",
       resource_documentation: "https://github.com/switaslabs/aposkal-mcp",
     })
   );
@@ -249,7 +249,7 @@ function loginPage(ar: AuthRequest, error?: string): Response {
   const hidden = (n: string, v: string) => `<input type="hidden" name="${n}" value="${escapeHtml(v)}">`;
   const html = `<!doctype html>
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aposkal MCP — Bağlantı izni</title><meta name="robots" content="noindex">
+<title>Aposkal MCP (Resmî Olmayan) — Bağlantı izni</title><meta name="robots" content="noindex">
 <style>
 :root{--bg:#f7f9fb;--fg:#13233a;--muted:#5b6b80;--card:#fff;--line:#e3e8ef;--accent:#00a896;--err:#b42318}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1722;--fg:#e6edf5;--muted:#9aa9bb;--card:#16212f;--line:#243245;--err:#f97066}}
@@ -258,9 +258,10 @@ main{max-width:440px;margin:0 auto;padding:48px 16px}.card{background:var(--card
 h1{font-size:1.3rem;margin:0 0 4px}.muted{color:var(--muted);font-size:.92rem}label{display:block;margin:16px 0 6px;font-weight:600}
 input[type=password]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:transparent;color:inherit;font:inherit}
 button{margin-top:16px;width:100%;padding:11px;border:0;border-radius:8px;background:var(--accent);color:#fff;font:600 1rem system-ui;cursor:pointer}
-.err{color:var(--err);margin-top:12px}ul{padding-left:18px;margin:12px 0}a{color:inherit}footer{margin-top:20px;text-align:center}
+.err{color:var(--err);margin-top:12px}.tag{display:inline-block;margin:2px 0 10px;padding:2px 10px;border-radius:999px;border:1px solid var(--line);font-size:.8rem;color:var(--muted)}ul{padding-left:18px;margin:12px 0}a{color:inherit}footer{margin-top:20px;text-align:center}
 </style></head><body><main><div class="card">
 <h1>Aposkal MCP'ye bağlan</h1>
+<div class="tag">Resmî olmayan entegrasyon · Switas Consultancy</div>
 <div class="muted"><strong>${escapeHtml(ar.client.n)}</strong> uygulaması bu sunucuya erişmek istiyor.</div>
 <ul class="muted">
 <li>Yetki verirseniz uygulama, sunucuya tanımlı Aposkal hesabıyla, sunucunun güvenlik ayarlarının izin verdiği işlemleri yapabilir.</li>
@@ -275,7 +276,7 @@ ${hidden("code_challenge", ar.codeChallenge)}${hidden("code_challenge_method", "
 ${error ? `<div class="err">${escapeHtml(error)}</div>` : ""}
 <button type="submit">İzin ver ve bağlan</button>
 </form></div>
-<footer class="muted">© <a href="https://switas.com">Switas Consultancy</a> · <a href="https://github.com/switaslabs/aposkal-mcp">aposkal-mcp</a></footer>
+<footer class="muted">© <a href="https://switas.com">Switas Consultancy</a> · <a href="https://github.com/switaslabs/aposkal-mcp">aposkal-mcp</a><br>Bu sunucu Aposkal'ın resmî ürünü değildir.</footer>
 </main></body></html>`;
   const formTarget = new URL(ar.redirectUri).origin;
   return new Response(html, {

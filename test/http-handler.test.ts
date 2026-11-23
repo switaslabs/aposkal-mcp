@@ -46,6 +46,8 @@ describe("HTTP (Vercel) modu", () => {
     expect(init.status).toBe(200);
     const initBody = await init.json();
     expect(initBody.result.serverInfo.title).toContain("Switas Consultancy");
+    expect(initBody.result.serverInfo.title).toContain("Resmî Olmayan");
+    expect(initBody.result.instructions).toContain("resmî ürünü değildir");
 
     const list = await (await handleMcpRequest(rpc({ jsonrpc: "2.0", id: 2, method: "tools/list" }))).json();
     const names = list.result.tools.map((t: { name: string }) => t.name);

@@ -16,7 +16,7 @@ import { generatedTool, selectOperations } from "./tools/generated.js";
 import { metaTools } from "./tools/meta.js";
 import { annotations, type ToolDef } from "./tools/types.js";
 import { workflowTools } from "./tools/workflows.js";
-import { AUTHOR, AUTHOR_URL, NAME, VERSION } from "./version.js";
+import { AUTHOR, AUTHOR_URL, NAME, UNOFFICIAL, UNOFFICIAL_NOTE, VERSION } from "./version.js";
 
 /** Sunucu ikonu (pakete dahil PNG; çevrimdışı da çalışsın diye data: URI olarak gönderilir). */
 let iconCache: Array<{ src: string; mimeType: string; sizes: string[] }> | undefined;
@@ -31,7 +31,8 @@ function serverIcons(): Array<{ src: string; mimeType: string; sizes: string[] }
   return iconCache;
 }
 
-const INSTRUCTIONS = `Aposkal muhasebe API'si için MCP sunucusu — geliştiren: ${AUTHOR} (${AUTHOR_URL}).
+const INSTRUCTIONS = `Aposkal muhasebe API'si için ${UNOFFICIAL.toLocaleLowerCase("tr")} MCP sunucusu — geliştiren: ${AUTHOR} (${AUTHOR_URL}).
+- ${UNOFFICIAL_NOTE} Kullanıcı sorarsa bunu açıkça belirtin.
 - companyId değerini öğrenmek için aposkal_list_companies ile başlayın.
 - API'deki herhangi bir işleme ulaşmak için aposkal_search_endpoints, aposkal_describe_endpoint ve aposkal_call_endpoint araçlarını kullanın.
 - Oranlar kesirdir (0.2 = %20). Tarihler yyyy-MM-dd biçimindedir. Listeler sayfalıdır (page 0'dan başlar, size).
@@ -69,7 +70,7 @@ export function createServer(cfg: Config, deps: { spec?: Spec; client?: AposkalC
     {
       name: NAME,
       version: VERSION,
-      title: `Aposkal MCP — ${AUTHOR}`,
+      title: `Aposkal MCP (${UNOFFICIAL}) — ${AUTHOR}`,
       websiteUrl: AUTHOR_URL,
       icons: serverIcons(),
     },

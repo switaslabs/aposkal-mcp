@@ -6,7 +6,8 @@
 
 ### Eklenenler
 
-- İlk sürüm. Geliştiren: Switas Consultancy (https://switas.com).
+- İlk sürüm. Geliştiren: Switas Consultancy (https://switas.com). Aposkal için resmî olmayan bir entegrasyondur.
+- Sunucu başlığında, talimatlarda, giriş ve açılış sayfalarında "Resmî Olmayan" ibaresi.
 - Aposkal API V1'in 430 operasyonunun tamamını kapsayan stdio MCP sunucusu (paketle gelen OpenAPI 3.1 tanımından).
 - Tamamen Türkçe arayüz:
   - 430 operasyonun Türkçe özet ve açıklamaları (`i18n/aposkal-tr.json`)
