@@ -3,14 +3,13 @@
  * aposkal-mcp · Switas Consultancy (https://switas.com)
  */
 import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import type { Config } from "./config.js";
 import type { ExecContext } from "./executor.js";
 import { ApiError, AposkalClient } from "./http.js";
 import { decide, PolicyError } from "./policy.js";
+import { dataFile } from "./paths.js";
 import { log, redact } from "./redact.js";
 import { Spec } from "./spec.js";
 import { generatedTool, selectOperations } from "./tools/generated.js";
@@ -20,13 +19,16 @@ import { workflowTools } from "./tools/workflows.js";
 import { AUTHOR, AUTHOR_URL, NAME, VERSION } from "./version.js";
 
 /** Sunucu ikonu (pakete dahil PNG; çevrimdışı da çalışsın diye data: URI olarak gönderilir). */
+let iconCache: Array<{ src: string; mimeType: string; sizes: string[] }> | undefined;
 function serverIcons(): Array<{ src: string; mimeType: string; sizes: string[] }> {
+  if (iconCache) return iconCache;
   try {
-    const file = join(dirname(fileURLToPath(import.meta.url)), "..", "assets", "icon-128.png");
-    return [{ src: `data:image/png;base64,${readFileSync(file).toString("base64")}`, mimeType: "image/png", sizes: ["128x128"] }];
+    const file = dataFile("assets", "icon-128.png");
+    iconCache = [{ src: `data:image/png;base64,${readFileSync(file).toString("base64")}`, mimeType: "image/png", sizes: ["128x128"] }];
   } catch {
-    return [];
+    iconCache = [];
   }
+  return iconCache;
 }
 
 const INSTRUCTIONS = `Aposkal muhasebe API'si için MCP sunucusu — geliştiren: ${AUTHOR} (${AUTHOR_URL}).

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aposkal MCP Sunucusu</title>
+  <meta name="description" content="Aposkal muhasebe API'si için Model Context Protocol (MCP) sunucusu. Geliştiren: Switas Consultancy.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/icon.png">
+  <style>
+    :root { --bg: #f7f9fb; --fg: #13233a; --muted: #5b6b80; --card: #fff; --line: #e3e8ef; --accent: #00c4b0; --code: #eef2f6; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f1722; --fg: #e6edf5; --muted: #9aa9bb; --card: #16212f; --line: #243245; --code: #1d2a3b; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+    header { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
+    header img { width: 72px; height: 72px; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+    h1 { font-size: 1.6rem; margin: 0; }
+    .muted { color: var(--muted); }
+    section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 16px 0; }
+    h2 { font-size: 1.1rem; margin: 0 0 8px; }
+    code, pre { background: var(--code); border-radius: 6px; font: 0.9rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    code { padding: 1px 6px; }
+    pre { padding: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+    ul { padding-left: 20px; margin: 8px 0; }
+    a { color: inherit; }
+    footer { margin-top: 32px; font-size: 0.9rem; }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 18%, transparent); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="/icon.png" alt="">
+    <div>
+      <h1>Aposkal MCP Sunucusu</h1>
+      <div class="muted">Geliştiren: <a href="https://switas.com">Switas Consultancy</a></div>
+    </div>
+  </header>
+
+  <p>Bu adreste, <a href="https://aposkal.com">Aposkal</a> muhasebe API'sini Claude gibi yapay zekâ asistanlarına bağlayan bir <a href="https://modelcontextprotocol.io">MCP</a> sunucusu çalışıyor. <span class="badge">Token korumalı</span></p>
+
+  <section>
+    <h2>Bağlantı adresi</h2>
+    <p>MCP uç noktası: <code>/api/mcp</code> (Streamable HTTP, yalnızca POST). Her istek, sunucuyu kuran kişinin verdiği token ile yapılmalıdır.</p>
+    <pre>claude mcp add --transport http aposkal https://BU-ADRES/api/mcp --header "Authorization: Bearer &lt;token&gt;"</pre>
+  </section>
+
+  <section>
+    <h2>Güvenlik</h2>
+    <ul>
+      <li>Token olmadan hiçbir araç çalışmaz.</li>
+      <li>Varsayılan mod salt-okumadır.</li>
+      <li>GİB'e ya da SGK'ya veri gönderen işlemler ayrıca açılmadıkça kapalıdır ve kullanıcı onayı (<code>confirm</code>) ister.</li>
+      <li>API anahtarları yalnızca sunucu ortam değişkenlerinde tutulur. Bu sayfada ya da yanıtlarda asla görünmez.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Kendi sunucunuzu kurun</h2>
+    <p>Kaynak kod ve kurulum adımları: <a href="https://github.com/switaslabs/aposkal-mcp">github.com/switaslabs/aposkal-mcp</a></p>
+  </section>
+
+  <footer class="muted">
+    © 2026 <a href="https://switas.com">Switas Consultancy</a> · MIT Lisansı.<br>
+    Bu proje Aposkal'ın resmî ürünü değildir. "Aposkal" adı ve logosu sahibine aittir.
+  </footer>
+</main>
+</body>
+</html>

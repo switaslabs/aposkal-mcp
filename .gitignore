@@ -26,3 +26,6 @@ npm-debug.log*
 
 # Yerel Claude ayarları
 .claude/settings.local.json
+
+# Vercel yerel klasörü
+.vercel/

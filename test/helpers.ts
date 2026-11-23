@@ -18,6 +18,7 @@ export function cfg(over: Partial<Config> = {}): Config {
     defaultCompanyId: undefined,
     toolsets: [],
     downloadDir: "/tmp/aposkal-mcp-test-downloads",
+    saveBinaries: true,
     uploadDir: undefined,
     timeoutMs: 5_000,
     maxResponseChars: 60_000,

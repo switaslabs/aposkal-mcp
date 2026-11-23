@@ -31,6 +31,8 @@ export interface Config {
   /** Ayrı araç olarak açılacak üretilmiş gruplar ("all" ya da grup adları). */
   toolsets: string[];
   downloadDir: string;
+  /** false = ikili yanıtlar diske yazılmaz (ör. Vercel'de dosya sistemi geçicidir). */
+  saveBinaries: boolean;
   uploadDir?: string;
   timeoutMs: number;
   maxResponseChars: number;
@@ -145,6 +147,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     defaultCompanyId: e.APOSKAL_DEFAULT_COMPANY_ID,
     toolsets: e.APOSKAL_TOOLSETS,
     downloadDir: absDir(e.APOSKAL_DOWNLOAD_DIR) ?? join(tmpdir(), "aposkal-mcp", "downloads"),
+    saveBinaries: true,
     uploadDir: absDir(e.APOSKAL_UPLOAD_DIR),
     timeoutMs: e.APOSKAL_TIMEOUT_MS ?? 30_000,
     maxResponseChars: e.APOSKAL_MAX_RESPONSE_CHARS ?? 60_000,

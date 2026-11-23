@@ -22,4 +22,8 @@
   - sır maskeleme
   - sınırlı dosya yükleme
 - Sunucu ikonu ve web sitesi bilgisi (`icons`, `websiteUrl`).
+- Vercel'de uzak çalışma modu:
+  - token korumalı, durumsuz Streamable HTTP (`api/mcp.js`)
+  - `vercel.json` ve Türkçe açılış sayfası
+  - "Vercel'e kur" düğmesi
 - Commit öncesi kanca (pre-commit hook) ve CI'da gizli bilgi taraması (gitleaks), Dependabot.

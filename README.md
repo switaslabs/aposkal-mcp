@@ -10,7 +10,8 @@ Geliştiren: **[Switas Consultancy](https://switas.com)**
 
 [![Lisans: MIT](https://img.shields.io/badge/lisans-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-339933.svg)](https://nodejs.org)
-[![MCP](https://img.shields.io/badge/MCP-stdio-6E56CF.svg)](https://modelcontextprotocol.io)
+[![MCP](https://img.shields.io/badge/MCP-stdio%20%7C%20HTTP-6E56CF.svg)](https://modelcontextprotocol.io)
+[![Vercel'e kur](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fswitaslabs%2Faposkal-mcp&env=APOSKAL_API_KEY,APOSKAL_API_SECRET,APOSKAL_ENV,MCP_AUTH_TOKEN&envDescription=Aposkal%20API%20bilgileri%20ve%20en%20az%2032%20karakterlik%20eri%C5%9Fim%20token%27%C4%B1&envLink=https%3A%2F%2Fgithub.com%2Fswitaslabs%2Faposkal-mcp%23vercele-kurulum)
 [![Geliştiren: Switas Consultancy](https://img.shields.io/badge/geli%C5%9Ftiren-Switas%20Consultancy-0B7285.svg)](https://switas.com)
 
 </div>
@@ -35,11 +36,12 @@ Asistanınıza "geçen ayın kâr-zarar raporunu çıkar", "vadesi geçmiş alac
 8. [API grupları (toolset'ler)](#api-grupları-toolsetler)
 9. [Yapılandırma](#yapılandırma)
 10. [İstemcilere kurulum](#istemcilere-kurulum)
-11. [Örnek istemler](#örnek-istemler)
-12. [Doğrulama durumu](#doğrulama-durumu)
-13. [Sorun giderme](#sorun-giderme)
-14. [Geliştirme ve katkı](#geliştirme-ve-katkı)
-15. [Hakkında](#hakkında)
+11. [Vercel'e kurulum](#vercele-kurulum)
+12. [Örnek istemler](#örnek-istemler)
+13. [Doğrulama durumu](#doğrulama-durumu)
+14. [Sorun giderme](#sorun-giderme)
+15. [Geliştirme ve katkı](#geliştirme-ve-katkı)
+16. [Hakkında](#hakkında)
 
 ---
 
@@ -51,6 +53,7 @@ Asistanınıza "geçen ayın kâr-zarar raporunu çıkar", "vadesi geçmiş alac
 - **Aposkal kurallarını bilir.** Doğru fatura senaryosunun seçimi, kesirli oranlar (%20 → `0.2`), zorunlu belge düzeyi vergi ve TAHSILAT yön kuralı kodda çözülür.
 - **Tamamen Türkçe.** 430 operasyonun özetleri ve açıklamaları, araç açıklamaları, hata mesajları ve loglar Türkçedir. Aposkal'ın İngilizce API metinlerinin yerine Türkçe karşılıkları kullanılır ([`i18n/aposkal-tr.json`](i18n/aposkal-tr.json)).
 - **Türkçe arama.** "fatura indir", "cari bakiye", "bordro" gibi sorgular doğrudan eşleşir.
+- **Yerelde veya Vercel'de.** Bilgisayarınızda yerel süreç (stdio) olarak ya da token korumalı uzak sunucu (Streamable HTTP) olarak Vercel'de çalışır.
 - **Canlıda test edildi.** Okuma araçları canlı Aposkal ortamında denendi (bkz. [Doğrulama durumu](#doğrulama-durumu)).
 
 ## Hızlı başlangıç
@@ -234,10 +237,11 @@ Aşağıdaki tabloda her alanda neler yapılabildiği ve bunun hangi ayarla aç�
 
 ### Teknik sınırlamalar
 
-- **Yalnızca stdio.** Sunucu yerel bir süreç olarak çalışır. Uzak (HTTP/SSE) MCP sunucusu olarak barındırma henüz desteklenmiyor.
+- **Uzak modda tek token.** Vercel kurulumunda erişim tek bir paylaşılan token ile korunur. Kullanıcı bazlı oturum açma (OAuth) henüz yok; token'ı bilen herkes sunucunun tüm yetkileriyle işlem yapar.
+- **Uzak mod durumsuzdur.** Oturum tutulmaz, sunucudan istemciye bildirim akışı (SSE) yoktur. Her istek yalnızca POST ile yapılır.
 - **Tek anahtar, tek kullanıcı.** Her sunucu örneği tek bir API anahtarıyla çalışır ve o anahtarın kullanıcısının yetkilerini taşır.
 - **Büyük yanıtlar kırpılır.** Asistana dönen yanıt `APOSKAL_MAX_RESPONSE_CHARS` (varsayılan 60.000 karakter) ile sınırlıdır. Uzun listelerde `page` ve `size` parametrelerini kullanın.
-- **İkili dosyalar asistana gönderilmez.** PDF gibi dosyalar `APOSKAL_DOWNLOAD_DIR` klasörüne kaydedilir ve asistana yalnızca dosya yolu bildirilir. Belge indirme uçları için geçici, imzalı bir CDN linki döner.
+- **İkili dosyalar asistana gönderilmez.** Yerel modda PDF gibi dosyalar `APOSKAL_DOWNLOAD_DIR` klasörüne kaydedilir ve asistana yalnızca dosya yolu bildirilir. Vercel'de dosya sistemi geçici olduğu için kaydedilmez. Belge indirme uçları her iki modda da geçici, imzalı bir CDN linki döndürür.
 - **Yazma işlemleri otomatik tekrar denenmez.** Bu, mükerrer kaydı önlemek içindir. Bir yazma isteği zaman aşımına uğrarsa işlemin uygulanıp uygulanmadığını kontrol edip öyle tekrar deneyin.
 - **Webhook olayları alınamaz.** Sunucu webhook tanımlayabilir (hassas işlem) ama Aposkal'dan gelen olayları dinleyen bir uç sunmaz.
 - **Gövde şemaları sunucuda doğrulanmaz.** Parametre adları, tipleri ve yol değerleri denetlenir. Gövdenin içeriği ise Aposkal tarafından doğrulanır ve hatalar `400` olarak döner.
@@ -286,6 +290,7 @@ Bu sunucu **gerçek muhasebe verisine** erişir. Her operasyon aşağıdaki beş
 
 | Koruma | Açıklama |
 |---|---|
+| Uzak mod token'ı | Vercel kurulumunda `MCP_AUTH_TOKEN` (en az 32 karakter) zorunludur. Token yoksa sunucu hiçbir isteğe hizmet vermez. Token sabit süreli karşılaştırılır. CORS açılmaz. |
 | Gizli araçlar | İzin verilmeyen araçlar istemciye hiç listelenmez. Yine de her çağrı yürütme anında yeniden denetlenir. |
 | Firma izin listesi | `APOSKAL_COMPANY_IDS` dışındaki firmalara erişim reddedilir. |
 | SSRF koruması | API adresi `APOSKAL_ENV` ile sabittir. Yol parametreleri doğrulanır ve encode edilir. `../`, `/` ve `//` reddedilir. |
@@ -474,6 +479,8 @@ claude mcp add aposkal -e APOSKAL_ENV=live -e APOSKAL_API_KEY=... -e APOSKAL_API
 
 stdio destekleyen her MCP istemcisi kullanılabilir. Komut `node /tam/yol/aposkal-mcp/dist/index.js`, ortam değişkenleri yukarıdaki tablodaki gibidir.
 
+Uzak (Vercel) sunucuya bağlanmak için bkz. [Vercel'e kurulum](#vercele-kurulum).
+
 Yerel geliştirmede `.env` dosyasıyla çalıştırmak için:
 
 ```bash
@@ -481,6 +488,85 @@ node --env-file=.env dist/index.js
 ```
 
 > ⚠️ İstemci yapılandırma dosyaları sırları düz metin olarak saklar. Bu dosyaları paylaşmayın, ekran görüntüsünü almayın ve bir repoya eklemeyin.
+
+## Vercel'e kurulum
+
+Sunucuyu [Vercel](https://vercel.com) üzerinde, token ile korunan bir uzak MCP sunucusu olarak çalıştırabilirsiniz. Böylece bilgisayarınızda Node.js kurmadan, Claude'un web ve mobil sürümleri dahil uzak MCP destekleyen istemcilerden bağlanabilirsiniz.
+
+> ⚠️ **Önemli:** Uzak kurulumda Aposkal API anahtarınız Vercel'de saklanır ve sunucu internetten erişilebilir hale gelir. **Token'ı bilen herkes** sunucunun yetkileriyle Aposkal verinize erişebilir. Token'ı bir parola gibi saklayın, yalnızca güvendiğiniz kişilerle paylaşın ve `APOSKAL_COMPANY_IDS` ile firmaları sınırlayın.
+
+### 1. Token üretin
+
+En az 32 karakterlik rastgele bir token üretin:
+
+```bash
+openssl rand -hex 32
+```
+
+### 2. Projeyi Vercel'e aktarın
+
+İki yol var:
+
+- **Tek tıkla kurulum:** README'nin başındaki **Vercel'e kur** düğmesine tıklayın. Vercel repoyu hesabınıza kopyalar ve zorunlu ortam değişkenlerini sorar.
+- **Elle kurulum:** Vercel panelinde **Add New → Project** ile repoyu seçin. Ayarlar `vercel.json` dosyasından otomatik okunur:
+
+| Ayar | Değer |
+|---|---|
+| Framework Preset | **Other** (otomatik gelir, değiştirmeyin) |
+| Install Command | `npm ci` |
+| Build Command | `npm run build` |
+| Output Directory | `public` (açılış sayfası) |
+| Node.js sürümü | 20.x veya üstü (Project Settings → General) |
+
+### 3. Ortam değişkenlerini girin
+
+Vercel panelinde **Project Settings → Environment Variables** bölümüne şunları ekleyin. Değerler repoya asla yazılmaz.
+
+| Değişken | Zorunlu | Örnek / açıklama |
+|---|:---:|---|
+| `APOSKAL_API_KEY` | ✅ | Aposkal API Key |
+| `APOSKAL_API_SECRET` | ✅ | Aposkal API Secret |
+| `APOSKAL_ENV` | ✅ | `live` veya `test` |
+| `MCP_AUTH_TOKEN` | ✅ | 1. adımda ürettiğiniz token |
+| `APOSKAL_COMPANY_IDS` | önerilir | Erişilebilecek firma ID'leri |
+| `APOSKAL_MODE` | | Varsayılan `readonly`. Uzak kurulumda salt-okuma önerilir. |
+| `APOSKAL_TOOLSETS` | | İsteğe bağlı gruplar |
+
+Diğer tüm ayarlar [Yapılandırma](#yapılandırma) tablosundakiyle aynıdır. Değişkenleri ekledikten veya değiştirdikten sonra projeyi yeniden deploy edin.
+
+### 4. İstemciyi bağlayın
+
+Sunucu adresi `https://<proje-adı>.vercel.app/api/mcp` olur. Kök adreste (`/`) kurulumu anlatan bir açılış sayfası açılır.
+
+Claude Code:
+
+```bash
+claude mcp add --transport http aposkal https://<proje-adı>.vercel.app/api/mcp --header "Authorization: Bearer <token>"
+```
+
+`Authorization` başlığı ekleyebilen diğer MCP istemcileri:
+
+```json
+{
+  "mcpServers": {
+    "aposkal": {
+      "url": "https://<proje-adı>.vercel.app/api/mcp",
+      "headers": { "Authorization": "Bearer <token>" }
+    }
+  }
+}
+```
+
+> Bazı istemciler (ör. yalnızca OAuth destekleyen bağlayıcılar) özel başlık eklemeye izin vermez. Bu istemciler şimdilik desteklenmiyor.
+
+### Uzak moda özel davranışlar
+
+- **Token zorunlu.** `MCP_AUTH_TOKEN` yoksa veya 32 karakterden kısaysa sunucu tüm isteklere `503` döner. Token yanlışsa `401` döner.
+- **Sadece POST.** Sunucu durumsuz (stateless) Streamable HTTP kullanır.
+- **Dosyalar kaydedilmez.** Belgeler için imzalı CDN linki döner.
+- **Süre sınırı.** İstek süresi en fazla 60 saniyedir (`vercel.json` → `maxDuration`).
+- **Güvenlik politikası aynı.** Salt-okuma varsayılanı, `confirm` onayı ve GİB/SGK kısıtları yerel modla birebir aynıdır.
+- **Ek koruma.** İsterseniz Vercel'in **Firewall** özelliğiyle IP kısıtlaması ve hız sınırı da ekleyebilirsiniz.
 
 ## Örnek istemler
 
@@ -512,6 +598,7 @@ node --env-file=.env dist/index.js
 |---|---|
 | Kimlik doğrulama, firma listesi, KDV oranları, cari arama, belge listesi | ✅ Canlı ortamda |
 | Belge indirme linki (CDN yönlendirmesi) | ✅ Canlı ortamda |
+| Uzak (HTTP) mod: token doğrulama, araç listesi, canlı okuma çağrıları | ✅ Yerel Vercel simülasyonunda (gerçek Vercel'e henüz deploy edilmedi) |
 | Vadesi geçmiş ödeme raporu, e-Fatura mükellef sorgusu | ✅ Canlı ortamda |
 | Yalnızca bearer olarak belgelenmiş uçlar (depo, stok transferi, ayrıştırılmış belgeler) | ✅ Canlı ortamda, API anahtarıyla çalıştı |
 | Fatura taslağı hesaplaması (`dryRun`) | ✅ Canlı ortamda (yalnızca GET istekleri) |
@@ -533,6 +620,8 @@ Yazma araçlarını ilk kez kullanırken önce `dryRun` veya test ortamı (`APOS
 | `companyId …, APOSKAL_COMPANY_IDS listesinde değil` | Firma izin listesinde değil. |
 | `400 … E-Fatura mükellefine E-arşiv fatura gönderilemez` | Senaryo yanlış. `aposkal_check_einvoice_recipient` ile kontrol edin ya da fatura aracında `scenario: "AUTO"` kullanın. |
 | Yanıt `…[kırpıldı…]` ile bitiyor | Yanıt çok büyük. `size` parametresini küçültün ya da sonraki sayfayı (`page`) isteyin. |
+| Vercel'de `401 Yetkisiz` | `Authorization: Bearer <token>` başlığı eksik veya token yanlış. |
+| Vercel'de `503 Sunucu yapılandırılmamış` | Zorunlu bir ortam değişkeni eksik veya `MCP_AUTH_TOKEN` 32 karakterden kısa. Ayrıntı Vercel'in fonksiyon loglarında yazar. Değişkenleri düzelttikten sonra yeniden deploy edin. |
 | Araç listede görünmüyor | Güvenlik ayarları izin vermiyor ya da araç bir toolset'e ait ve o grup açılmamış. `aposkal_search_endpoints` ile arayabilir, `aposkal_call_endpoint` ile çağırabilirsiniz. |
 
 ## Geliştirme ve katkı
@@ -560,8 +649,12 @@ npm run typecheck && npm run build
 **Proje yapısı**
 
 ```
+api/
+  mcp.js            Vercel Function giriş noktası (uzak mod)
+public/             Vercel açılış sayfası
 src/
-  index.ts          giriş noktası (stdio)
+  index.ts          giriş noktası (stdio, yerel mod)
+  http-handler.ts   uzak (HTTP) mod: token doğrulama, durumsuz MCP
   server.ts         MCP sunucusu, araç kaydı
   config.ts         ortam değişkenleri ve doğrulama
   policy.ts         güvenlik politikası (tek karar noktası)
@@ -570,6 +663,7 @@ src/
   executor.ts       argümanlardan istek üretme, yanıt biçimlendirme
   http.ts           Aposkal HTTP istemcisi
   redact.ts         sır maskeleme ve log
+  paths.ts          veri dosyalarının konumu
   tools/            keşif, iş akışı ve üretilmiş araçlar
 openapi/            Aposkal OpenAPI tanımı (değiştirilmeden)
 i18n/               430 operasyonun Türkçe özet ve açıklamaları, Türkçe grup adları

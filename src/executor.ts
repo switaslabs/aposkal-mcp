@@ -124,6 +124,18 @@ export async function formatResponse(res: ApiResponse, cfg: Config, label: strin
         2,
       );
     case "binary": {
+      if (!cfg.saveBinaries) {
+        return JSON.stringify(
+          {
+            status: res.status,
+            contentType: res.contentType,
+            bytes: res.bytes.byteLength,
+            not: "Bu sunucu HTTP (uzak) modunda çalıştığı için ikili dosyalar kaydedilmez. Belgeler için aposkal_get_document_download_link aracıyla imzalı bağlantı alın.",
+          },
+          null,
+          2,
+        );
+      }
       await mkdir(cfg.downloadDir, { recursive: true, mode: 0o700 });
       const ext = res.contentType.includes("pdf") ? "pdf" : res.contentType.includes("zip") ? "zip" : res.contentType.includes("sheet") || res.contentType.includes("excel") ? "xlsx" : "bin";
       const safeLabel = label.replace(/[^A-Za-z0-9_-]/g, "_").slice(0, 60);

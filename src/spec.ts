@@ -4,8 +4,7 @@
  * aposkal-mcp · Switas Consultancy (https://switas.com)
  */
 import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { dataFile } from "./paths.js";
 import { classify, type Risk } from "./risk.js";
 
 type JsonSchema = Record<string, unknown>;
@@ -138,13 +137,16 @@ export class Spec {
     }
   }
 
+  private static bundled: Spec | undefined;
+
+  /** Paketle gelen tanımı yükler. Sonuç önbelleğe alınır (sunucusuz ortamda her istekte yeniden okunmaz). */
   static loadBundled(): Spec {
-    const here = dirname(fileURLToPath(import.meta.url));
-    // hem src/ (testler) hem dist/ (çalışma zamanı) altından çalışır
-    const root = join(here, "..");
-    const doc = JSON.parse(readFileSync(join(root, "openapi", "aposkal-openapi.json"), "utf8")) as OpenApiDoc;
-    const tr = JSON.parse(readFileSync(join(root, "i18n", "aposkal-tr.json"), "utf8")) as TurkishTexts;
-    return new Spec(doc, tr);
+    if (!Spec.bundled) {
+      const doc = JSON.parse(readFileSync(dataFile("openapi", "aposkal-openapi.json"), "utf8")) as OpenApiDoc;
+      const tr = JSON.parse(readFileSync(dataFile("i18n", "aposkal-tr.json"), "utf8")) as TurkishTexts;
+      Spec.bundled = new Spec(doc, tr);
+    }
+    return Spec.bundled;
   }
 
   /**
